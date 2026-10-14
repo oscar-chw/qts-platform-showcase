@@ -388,6 +388,42 @@ class EvidenceReportTests(unittest.TestCase):
                 self.assertEqual(report["stored_rows"]["total"], 704009291430)
                 self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
 
+    def test_indented_consumed_tables_preserve_report_values(self):
+        for heading in ["Raw counts", "Headline numbers", "Scale", "Concurrency"]:
+            for width in [1, 2, 3]:
+                with self.subTest(heading=heading, width=width):
+                    self.path.write_bytes(self.original)
+                    lines = self.path.read_text().splitlines()
+                    start = lines.index("## " + heading)
+                    stop = next(i for i in range(start + 1, len(lines)) if lines[i].startswith("## "))
+                    for index in range(start + 1, stop):
+                        if lines[index].startswith("|"):
+                            lines[index] = " " * width + lines[index]
+                    self.path.write_text("\n".join(lines) + "\n")
+                    report = self.success()
+                    self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                    self.assertEqual(report["concurrency_reads"]["total"], 1111)
+                    self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
+    def test_marker_prefixed_raw_markup_has_a_named_refusal(self):
+        for marker in ["> ", ">", "- ", "+ ", "* ", "1. ", "1) ", ">- ", "- > "]:
+            for markup in ["<!-- note -->", "<div></div>", "<?note?>"]:
+                with self.subTest(marker=marker, markup=markup):
+                    self.path.write_bytes(self.original)
+                    with self.path.open("a") as file:
+                        file.write("\n" + marker + markup + "\n")
+                    self.reject("inconsistent_arithmetic")
+
+    def test_literal_prefixed_markup_in_supported_code_remains_opaque(self):
+        for marker in ["> ", "- ", "1. ", ">- "]:
+            with self.subTest(marker=marker):
+                self.path.write_bytes(self.original)
+                literal = "```text\n" + marker + "<!-- note -->\n" + marker + "<div></div>\n```\n"
+                self.edit("## Raw counts\n", "## Raw counts\n\n" + literal)
+                report = self.success()
+                self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):

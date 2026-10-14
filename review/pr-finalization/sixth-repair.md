@@ -1,0 +1,5 @@
+# Consistent pipe rows and prefixed markup refusal
+
+Sixth hosted review `5525351248` at `3f4dc6b52e8feb4600a3fa2f9da3f1f1da26638b` found [accepted indentation reaching the older reader unchanged](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4276778000) and [marker-prefixed markup bypassing the format guard](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4276778010). The captured-input view must normalize every accepted pipe row to the form the unchanged arithmetic reader recognizes. Use the same marker-prefix grammar for the named markup refusal as for unsupported fence openers. Supported code remains opaque.
+
+Done when the actual prior command reproduces both issues, all four consumed tables with one/two/three spaces keep totals and exact digests, and prefixed raw markup produces the named refusal while its literal code examples remain valid. Every earlier method, numeric input, old arithmetic and privacy source stays unchanged. Close with the original full repository gate, unchanged causal cases with a same-run full control, and fresh exact-revision CI/review.

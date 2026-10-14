@@ -23,3 +23,7 @@ Fourth review atbbbf found negated expected figures accepted and supported headi
 ## Released 2026-10-14T21:30:17Z — local author
 
 Fifth review at843 found marker-prefixed fence openers hiding later evidence rows; fail-closed format repair required.
+
+## Released 2026-10-14T22:08:31Z — local author
+
+Sixth review at3f4 found accepted table indentation rejected and marker-prefixed markup bypassing the format guard; ordinary repair required.
