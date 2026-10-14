@@ -210,6 +210,44 @@ class EvidenceReportTests(unittest.TestCase):
         report = self.success()
         self.assertEqual(report["stored_rows"]["total"], 704009291430)
 
+    def test_unavailable_temporary_storage_is_named(self):
+        spec = importlib.util.spec_from_file_location("public_evidence_io_test", PROGRAM)
+        module = importlib.util.module_from_spec(spec)
+        sys.path.insert(0, str(PROGRAM.parent))
+        try:
+            spec.loader.exec_module(module)
+        finally:
+            sys.path.pop(0)
+        with patch.object(module.tempfile, "TemporaryDirectory", side_effect=OSError("storage unavailable")):
+            with self.assertRaises(module.ReportError) as caught:
+                module.report(self.path)
+        self.assertEqual(caught.exception.code, "report_io_error")
+
+    def test_failed_snapshot_write_cleans_up_and_preserves_input(self):
+        spec = importlib.util.spec_from_file_location("public_evidence_cleanup_test", PROGRAM)
+        module = importlib.util.module_from_spec(spec)
+        sys.path.insert(0, str(PROGRAM.parent))
+        try:
+            spec.loader.exec_module(module)
+        finally:
+            sys.path.pop(0)
+        real_directory = module.tempfile.TemporaryDirectory
+        created = []
+
+        def track_directory(*args, **kwargs):
+            directory = real_directory(*args, **kwargs)
+            created.append(Path(directory.name))
+            return directory
+
+        with patch.object(module.tempfile, "TemporaryDirectory", side_effect=track_directory):
+            with patch.object(module.Path, "write_bytes", side_effect=OSError("snapshot write failed")):
+                with self.assertRaises(module.ReportError) as caught:
+                    module.report(self.path)
+        self.assertEqual(caught.exception.code, "report_io_error")
+        self.assertTrue(created)
+        self.assertTrue(all(not directory.exists() for directory in created))
+        self.assertEqual(self.path.read_bytes(), self.original)
+
 
 def load_tests(loader, tests, pattern):
     suite = loader.loadTestsFromTestCase(EvidenceReportTests)
