@@ -15,3 +15,6 @@ python3 scripts/check_docs.py
 python3 scripts/check_docs.py --self-test
 bash scripts/demo.sh >/dev/null
 echo "PASS  demo"
+test -f tests/test_evidence_report.py
+python3 -m unittest discover -s tests -p 'test_evidence_report.py'
+echo "PASS  evidence report"
