@@ -1,0 +1,33 @@
+{
+  "commands": [
+    {
+      "command": "bash scripts/check.sh",
+      "exit_code": 0,
+      "report_cases": 38,
+      "document_controls": 30,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m unittest discover -s tests -p test_evidence_report.py",
+      "exit_code": 0,
+      "report_cases": 38,
+      "document_controls": null,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m ruff check --config ruff.toml .",
+      "exit_code": 0,
+      "report_cases": null,
+      "document_controls": null,
+      "legacy_resource_warning": false
+    }
+  ],
+  "source_sha256": "ff6f327e045eb3e136fa24c3b6229b131c97c842fc79797f64488f5f0e60e108",
+  "tests_sha256": "670775b4ed88de4af72a3d4ea78b35fa1561f32ddeed4a78d00b45a51fb22e17",
+  "review_findings": [
+    4275907086,
+    4275907096
+  ],
+  "private_pattern_count": 72,
+  "scope": "Actual Markdown/citation/refusal acceptance, original document/private-pattern checks; fresh remote evidence required"
+}

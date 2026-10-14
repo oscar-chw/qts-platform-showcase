@@ -47,13 +47,34 @@ def read_snapshot(path):
     return blob, text
 
 
+def markdown_lines(text):
+    fence = None
+    for line in text.splitlines():
+        if fence is not None:
+            if re.fullmatch(r" {0,3}" + re.escape(fence[0]) + "{" + str(fence[1]) + r",}[ \t]*", line):
+                fence = None
+            continue
+        opening = re.match(r" {0,3}(`{3,}|~{3,})(.*)$", line)
+        if opening and not (opening[1][0] == "`" and "`" in opening[2]):
+            fence = (opening[1][0], len(opening[1]))
+            continue
+        if len(re.match(r"[ \t]*", line)[0].expandtabs(4)) >= 4:
+            continue
+        yield line
+
+
 def section_rows(text, heading, code):
-    lines = text.splitlines()
-    starts = [i for i, line in enumerate(lines) if line.strip() == "## " + heading]
+    lines = list(markdown_lines(text))
+    headings = {}
+    for index, line in enumerate(lines):
+        match = re.fullmatch(r" {0,3}##(?:[ \t]+(.*))?", line)
+        if match:
+            headings[index] = re.sub(r"[ \t]+#+[ \t]*$", "", match[1] or "").strip()
+    starts = [i for i, title in headings.items() if title == heading]
     if len(starts) != 1:
         raise ReportError(code, "Section must appear exactly once: " + heading)
     start = starts[0]
-    stop = next((i for i in range(start + 1, len(lines)) if lines[i].strip().startswith("## ")), len(lines))
+    stop = next((i for i in headings if i > start), len(lines))
     rows = []
     for line in lines[start + 1:stop]:
         if not line.lstrip().startswith("|"):
@@ -112,17 +133,22 @@ def result_row(rows, name, prefix=False):
 
 def removal_source(reference, expected):
     citations = [part.strip() for part in reference.split(";")]
+    roles = {"counts", "day ranges", "only exact duplicates are removed"}
+    references = {}
     for citation in citations:
-        plain = re.sub(r" \([^()]*\)$", "", citation)
+        match = re.fullmatch(r"(.+) \(([^()]*)\)", citation)
+        if not match or match[2] not in roles or match[2] in references:
+            raise ReportError("inconsistent_sources", "Removal count, day-range and rule citations must each appear once")
+        plain, role = match.groups()
         parts = plain.rsplit(", ", 1)
         try:
             if len(parts) != 2 or not parts[0].strip() or date.fromisoformat(parts[1]).isoformat() != parts[1]:
                 raise ValueError("missing source name or date")
         except ValueError as error:
             raise ReportError("inconsistent_sources", "Removal references need named, valid dated sources") from error
-    count_refs = [citation for citation in citations if citation.endswith(" (counts)")]
-    if reference != expected and count_refs != [expected + " (counts)"]:
-        raise ReportError("inconsistent_sources", "Removal count reference differs from its contributing counts")
+        references[role] = plain
+    if set(references) != roles or references.get("counts") != expected:
+        raise ReportError("inconsistent_sources", "Removal references are incomplete or name a different count snapshot")
 
 
 def report(path):
@@ -148,12 +174,12 @@ def report(path):
             raise ReportError("inconsistent_sources", "Scale result and raw counts refer to different source snapshots")
     scale_removed = result_row(scale, "A-share rows removed by cleansing", prefix=True)
     removal_source(scale_removed[3], stored_source)
-    # Existing arithmetic code reads a path. Give it only our captured bytes so the digest and
-    # computed statements cannot refer to two different reads of a mutable caller file.
+    # Derive the arithmetic view from the captured input, excluding literal code examples.
+    # The original bytes still bind provenance; the caller file is never read a second time.
     try:
         with tempfile.TemporaryDirectory(prefix="public-evidence-") as directory:
             snapshot = Path(directory) / "results.md"
-            snapshot.write_bytes(blob)
+            snapshot.write_bytes("\n".join(markdown_lines(text)).encode("utf-8"))
             computed = derive(str(snapshot))
     except OSError as error:
         raise ReportError("report_io_error", "Temporary public snapshot storage is unavailable") from error

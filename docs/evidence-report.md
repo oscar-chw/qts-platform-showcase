@@ -59,9 +59,15 @@ must name that source too. Percentage denominators
 must be nonzero; the typed count must cover the cleansed count.
 Rows are checked across the complete section, including later or indented tables after prose.
 Both cleansing-removal count references must agree with their contributing raw counts. The scale
-row also cites dated day-range and rule sources; its single `(counts)` reference identifies the
-contributing count snapshot, while those other named citations retain their own dates. Raw counts
+row requires exactly one citation each for counts, day ranges and the exact-duplicate rule; its
+`(counts)` reference identifies the contributing count snapshot, while the other named citations
+retain their own dates. Raw counts
 remain one declared count set under a three-cell header; another header or count table is refused.
+Indented and fenced code examples cannot start/end sections or contribute table rows. Heading and
+fence recognition follow the relevant [CommonMark definitions](https://github.com/commonmark/commonmark-spec/blob/0.31.2/spec.txt).
+The report accepts the declared heading and pipe-table format; it does not provide a general Markdown renderer.
+The original bytes bind the digest. The arithmetic reader receives a deterministic view of that
+same captured input with literal code examples excluded; it never rereads the caller's file.
 
 | Failure | Reported code | Recovery |
 |---|---|---|

@@ -255,6 +255,35 @@ class EvidenceReportTests(unittest.TestCase):
                 self.edit(row, "|".join(cells))
                 self.reject("inconsistent_sources")
 
+    def test_removal_reference_role_does_not_excuse_missing_name_or_date(self):
+        for reference in ["table counts, 2026-10-03 (day ranges)",
+                          "data platform design, 2026-09-28 (only exact duplicates are removed)"]:
+            plain, role = reference.rsplit(" (", 1)
+            for invalid in ["unknown", ", " + plain.rsplit(", ", 1)[1], "table counts, 2026-99-03"]:
+                with self.subTest(reference=reference, invalid=invalid):
+                    self.path.write_bytes(self.original)
+                    row = next(line for line in self.path.read_text().splitlines()
+                               if line.startswith("| A-share rows removed by cleansing"))
+                    self.assertIn(reference, row)
+                    self.edit(row, row.replace(reference, invalid + " (" + role))
+                    self.reject("inconsistent_sources")
+
+    def test_examples_inside_consumed_sections_cannot_override_arithmetic(self):
+        for heading in ["Raw counts", "Headline numbers", "Scale", "Concurrency"]:
+            literal = ("## " + heading + "\n\n| Count | Value | Source |\n|---|---|---|\n"
+                       "| A-share cleansed orders | 1 | table counts, 2026-10-05 |")
+            examples = ["\n".join("    " + line for line in literal.splitlines()),
+                        "\n".join("\t" + line for line in literal.splitlines()),
+                        "```text\n" + literal + "\n```", "~~~text\n" + literal + "\n~~~"]
+            for example in examples:
+                with self.subTest(heading=heading, example=example):
+                    self.path.write_bytes(self.original)
+                    self.edit("## " + heading + "\n", "## " + heading + "\n\n" + example + "\n")
+                    report = self.success()
+                    self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                    self.assertEqual(report["concurrency_reads"]["total"], 1111)
+                    self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):
