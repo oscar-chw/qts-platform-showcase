@@ -1,0 +1,11 @@
+{
+  "implementation_revision": "8bf229ee2351500e38b4785cd322034ab5654ca6",
+  "command": "plan gate showcase-workflows 7 --owner codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1",
+  "exit_code": 0,
+  "checks_passed": 16,
+  "checks_failed": 0,
+  "duration_seconds": 10,
+  "configured_private_scan": true,
+  "record_sha256": "95a825fd85549c8bcdd415a012d6e0fe81fef3d4110994615a66c42af9a0a4c2",
+  "scope": "Full local repository audit for captured-input Markdown/citation computation; fresh hosted evidence required"
+}
