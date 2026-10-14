@@ -1,0 +1,15 @@
+{
+  "implementation_revision": "c32d5e0",
+  "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" bash ../tools/check_repo.sh \"$PWD\"",
+  "exit_code": 0,
+  "repository_checks": 16,
+  "private_pattern_count": 72,
+  "report_cases": 30,
+  "document_controls": 30,
+  "mutants_caught": 9,
+  "same_run_control": "pass",
+  "source_sha256": "4a8d85ea9aa9556e143c91d4162d574fb47e2bc2d8029c8e1051dddc7d0178f5",
+  "tests_sha256": "db1b667063b87faa016e377f4140e508492fc1ea895ba593194add77c529a3c3",
+  "privacy_checker_sha256": "111a436fe02d61bd6d4aa2eed01e59b306679dbbceac05379805d7d907c022d1",
+  "role": "author evidence; new remote review and coordinator acceptance required"
+}
