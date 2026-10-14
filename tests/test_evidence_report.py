@@ -131,6 +131,18 @@ class EvidenceReportTests(unittest.TestCase):
             self.edit("| " + value + " |", "| 0 |")
         self.reject("invalid_count_relationship")
 
+    def test_zero_typed_denominator_is_refused(self):
+        for value in ["293,894,477,866", "228,609,088,757", "43,446,124,248", "566,464,087,478"]:
+            self.edit("| " + value + " |", "| 0 |")
+        self.reject("invalid_count_relationship")
+
+    def test_counts_above_supported_integer_range_are_refused(self):
+        for value in ["9" * 40, "9223372036854775808"]:
+            with self.subTest(value=value):
+                self.path.write_bytes(self.original)
+                self.edit("| 293,894,477,866 |", "| " + value + " |")
+                self.reject("invalid_counts")
+
     def test_missing_source_file_is_named(self):
         missing = Path(self.temp.name) / "missing.md"
         run = self.run_report(missing)

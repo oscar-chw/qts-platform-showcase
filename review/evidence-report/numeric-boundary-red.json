@@ -1,0 +1,9 @@
+{
+  "command": "python3 -m unittest discover -s tests -p 'test_evidence_report.py'",
+  "expected_faults": [
+    "zero typed denominator produces an unstructured division error",
+    "oversized count reaches relationship checking instead of integer-domain refusal"
+  ],
+  "acceptance_change": "additive boundary cases; no prior assertion weakened",
+  "source_not_repaired_yet": true
+}
