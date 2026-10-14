@@ -7,6 +7,14 @@ Done-condition: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bas
       2026-10-14T12:01:36Z released — Held at preserved-patch checker-expression false positive; follow-up correction awaits coordinator decision.
       2026-10-14T12:10:23Z exit 0 in 2s [f0310ab2] — PASS  private-code / PASS  history / qts-platform-showcase: PASS (0 failed)
 
+- [>] 2. Add a structured public evidence report with bounded input, provenance, refusal and recovery checks | needs: 1 | ctx: docs/evidence-report.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T12:54:22Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+
+## Evidence-report scope
+
+Directly requested follow-up on 14 October: the coordinator accepted the scoped documentation candidate9ce249e and asked for meaningful development with evaluation. Preserve that branch head. The next user is a reviewer or researcher who wants a machine-readable audit record of the public raw-count table. The report will carry a source digest and dated references, computed stored totals and fixture read counts, with explicit unverified-private-source and operational-status fields. It must reject missing/duplicate/malformed counts, conflicting source dates and contradictory arithmetic, handle missing/invalid/oversized files, and recover after correcting the input. Use the existing figures parser and arithmetic checks; no third-party package or private input. Add acceptance cases first, commit them separately, then implement a small read-only command-line tool. Existing document/privacy/self-test checks remain; the full check will additionally run the new report cases. No current count, private platform runtime, speed or new public claim is inferred.
+
+existing: scripts/figures.py already parses the public tables and validates their computed statements; scripts/check.sh and current CI run the document checks and planted-defect controls. The source linked public importer is a separate release-held dependency, not needed for this report. The original input and new report must use one captured byte snapshot so the digest and checked numbers cannot refer to different reads.
+
 ## analysis
 
 A reader can see the architecture but must infer which layer to choose, how to record a reproducible request and whether the historical numbers imply current service health. Done when the public workflow gives inputs, expected outputs, refusal/recovery behavior, dated coverage and a runnable arithmetic example, with all existing document, privacy, arithmetic and repository checks passing. Private implementation and current operations remain outside this repository.

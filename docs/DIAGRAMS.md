@@ -9,6 +9,7 @@ of a path. If a diagram and the code disagree, the code wins.
 3. [Three layers: what changes each one](#3-three-layers-what-changes-each-one)
 4. [Look-ahead refusal](#4-look-ahead-refusal)
 5. [The alerting incident: detection worked, delivery did not](#5-the-alerting-incident-detection-worked-delivery-did-not)
+6. [Public evidence capture and verification](evidence-report.md#how-the-computation-works)
 
 ## 1. System overview
 

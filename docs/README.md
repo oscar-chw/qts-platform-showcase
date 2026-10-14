@@ -15,5 +15,6 @@ pages describe it at the level of ideas.
 
 | Page | What it answers |
 |---|---|
+| [evidence-report.md](evidence-report.md) | How do I obtain machine-readable public counts, dated references and a content digest, and detect malformed or conflicting inputs? |
 | [results.md](results.md) | Where does every number come from? Each figure with its label (Live or Test), its dated source, the raw counts behind the computed figures, and its caveats. |
 | [reliability.md](reliability.md) | How does the platform decide something works, and how does it find out when it stops? Gates, failures that pass for health, one incident, and the concurrency test. |

@@ -143,12 +143,14 @@ refusal, and it is published on purpose. Every figure, with its caveats:
 ```bash
 bash scripts/demo.sh    # re-derives every computed figure in docs/results.md from its raw counts
 bash scripts/check.sh   # adds the document checks (links, headline table, figures, terms) and their self-test
+python3 scripts/evidence_report.py   # structured counts, dated sources, document digest and explicit limits
 ```
 
 Python and a shell are sufficient; the scripts use the standard library. The demo's input is the
 published raw-count table; its output is the recomputed totals with a success or disagreement for
 each. For a concrete example, and a guide to choosing layers, pinning a request and handling
 missing observations, read [the researcher workflow](docs/research-workflow.md).
+For machine-readable output and named input errors, use [the evidence report](docs/evidence-report.md).
 
 There is no platform code here to run: this is a write-up. To read it in under five minutes,
 start with [results.md](docs/results.md). To run the ideas rather than read about them, see the
@@ -207,6 +209,6 @@ and review; 815 of the 845 commits in the main repository carry an AI co-author 
 2026-10-03). This repository holds none of the platform's code, no infrastructure detail and no
 data; every number cites a dated source document by title ([sources](docs/results.md#sources)).
 
-Text and diagrams: CC BY 4.0. Code in scripts/: MIT. Both in [LICENSE](LICENSE).
+Text and diagrams: CC BY 4.0. Code in scripts/ and tests/: MIT. Both in [LICENSE](LICENSE).
 
 Implemented with AI coding agents under Oscar's design and review.

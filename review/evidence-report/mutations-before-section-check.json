@@ -1,0 +1,64 @@
+{
+  "source_sha256": "6e21f796a1f7e6bca92fa3dd939487c8453a7a4f0b6b94e94cd2803caa4ff755",
+  "tests_sha256": "cc58338bdba024414434568a713101ad3f9a1e9da2045c8b04ddf9ff94e9667c",
+  "python_version": "3.9.6",
+  "cases": [
+    {
+      "case": "control",
+      "exit_code": 0,
+      "witness": null,
+      "expected_outcome": "pass",
+      "test_source_unchanged": true,
+      "implementation_sha256": "6e21f796a1f7e6bca92fa3dd939487c8453a7a4f0b6b94e94cd2803caa4ff755"
+    },
+    {
+      "case": "drop_crypto",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "0159c3a5fb012f21c9363291f6321eaf3553070e9a9caa537bfc27a438e1196c"
+    },
+    {
+      "case": "constant_digest",
+      "exit_code": 1,
+      "witness": "test_content_digest_changes_on_editorial_change",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "2fe9f62ef7e88f268c8a2e3e9955ab6d98f4cc0b1219647f018b7166a807053e"
+    },
+    {
+      "case": "claim_private_verified",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "5306247eb3828bc48e67eb360b391c3e3741517cc17a598179820d42aaf966bc"
+    },
+    {
+      "case": "reread_caller",
+      "exit_code": 1,
+      "witness": "test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "1931db1907bbd0108b6dbf6dd1378bd7fa5ff10f11239b3bc42c5518802791f6"
+    },
+    {
+      "case": "ignore_arithmetic",
+      "exit_code": 1,
+      "witness": "test_inconsistent_computed_sum_is_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "49d91cc67168f43921e8d634e64965f7c1d5f879d7c0a1101b8dbd7f0d4a6bde"
+    },
+    {
+      "case": "ignore_result_source",
+      "exit_code": 1,
+      "witness": "test_headline_date_must_match_raw_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "ad6de39465d9c856f5254645924f96e1a4b480c7874b97809bb291659dfc585c"
+    }
+  ],
+  "scope": "six isolated report defects and same-run unmodified control; acceptance cases unchanged"
+}

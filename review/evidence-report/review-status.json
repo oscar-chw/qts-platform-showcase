@@ -1,0 +1,12 @@
+{
+  "owner_source_review": "completed; numeric zero/oversized, duplicate section, conflicting scale provenance and scratch storage gaps each reproduced before repair",
+  "independent_review": "pending coordinator",
+  "routing_evaluation": {
+    "status": "shadow",
+    "dispatch_allowed": false,
+    "agent_created": false,
+    "authority": "candidate routing result not applied; models and effort unchanged"
+  },
+  "known_diagnostic": "Inherited figure reader emits ResourceWarning under warning-enabled direct unit calls; not suppressed and not changed in this slice.",
+  "remote_ci": "not run; local candidate unpublished"
+}

@@ -15,6 +15,7 @@ explicit synthetic inputs.
 | Repeat a data request later | [Pinned datasets](data-model.md#versioned-pinned-datasets) and the request record below | Which version and request rules must stay fixed; the dated concurrency fixture is evidence for its tested scope. |
 | Prevent a fill from using later observations | [Gap handling](data-model.md#one-interface-wherever-a-researcher-works) | Which policy to choose and when a request should be refused. Pinning a version alone does not make a transformation causal. |
 | Verify the public scale arithmetic | `bash scripts/demo.sh` | The published raw counts agree with the page's derived figures. This does not re-query the private dataset. |
+| Save a machine-readable audit record | [Evidence report](evidence-report.md) | Computed public counts with dated sources, a document digest and explicit unverified-private-source/current-health flags. |
 | Exercise versioning and failure behavior | [Public demo](https://github.com/oscar-chw/qts-platform-demo#quick-start) | Independently written code on a small synthetic delivery; private scale and timings do not transfer to it. |
 
 ## Record the request before using its results
