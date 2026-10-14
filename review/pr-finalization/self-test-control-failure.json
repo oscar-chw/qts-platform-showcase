@@ -1,0 +1,11 @@
+{
+  "command": "python3 scripts/check_docs.py --self-test",
+  "exit_code": 1,
+  "case_count": 29,
+  "wrong_outcomes": 15,
+  "control": "failed with forbidden terms",
+  "classification": "Full-tree self-test control contaminated by an unapproved capitalized identifier in the retained patch artifact; not usable as a boundary-test witness",
+  "valid_boundary_witness": "narrow-boundary-red.json records isolated old-vs-proposal rejection; field-scope-probes.json records the repaired scope",
+  "existing_test_assertions": "preserved",
+  "gate_state": "not passed"
+}

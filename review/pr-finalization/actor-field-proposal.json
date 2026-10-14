@@ -1,0 +1,21 @@
+{
+  "status": "prepared; not applied",
+  "base_check_sha256": "3c9a2a6a0a11b5ca613b24605f6628365a3d4f42d6e59aa764f582c0b8aefa80",
+  "proposed_check_sha256": "bb684758f9099374ffc9f810c5d53477680f99dd5b03821242091ae74f96137f",
+  "patch_sha256": "d62cc8c1a5c0dd75f3b541d5b9a144917a4fe351acfc5d0c21aaee830246763d",
+  "syntax_parse": "pass",
+  "old_fixture_count": 24,
+  "proposed_fixture_count": 28,
+  "old_fixture_expressions": "all24 byte-identical",
+  "additional_controls": [
+    "actor field cannot hide access wording",
+    "actor key used as access wording",
+    "public bracket actor field",
+    "public dotted actor field"
+  ],
+  "proposed_exception": "Only exact public GitHub bracket/dotted actor-field key spans; unrelated matches on the same line still reject.",
+  "real_private_list": "unchanged",
+  "live_check_source": "unchanged",
+  "proposal_runtime_evaluation": "not run; no check correction authority inferred",
+  "publication": "held pending exact human decision"
+}

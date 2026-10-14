@@ -1,0 +1,12 @@
+{
+  "status": "prepared; not applied; exact human decision required",
+  "scope": "Allow only existing public Python constant DOMAIN, caught in approved raw patch context, plus one positive control",
+  "base_check_sha256": "daeb012211c52e4d91e2f0acd567536408da4dc49a927646ca9545d9db8a4c32",
+  "proposed_check_sha256": "111a436fe02d61bd6d4aa2eed01e59b306679dbbceac05379805d7d907c022d1",
+  "patch_sha256": "88d8a85c1d2972bac354ccb6d29ea155f4ab9094a0848227e9d2ad292adfc182",
+  "original24fixture_expressions": "preserved by insertion only",
+  "private_patterns": "unchanged",
+  "earlier_actor_patch": "exact approved bytes preserved",
+  "runtime_evaluation": "not run",
+  "next_case_count_if_approved": 30
+}

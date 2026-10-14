@@ -1,0 +1,11 @@
+{
+  "decision": "Approve the exact public-field exception",
+  "human": "Oscar",
+  "received_at": "2026-10-14T18:32:15.165049+00:00",
+  "source": "Explicit human answer relayed by the coordinator to this source owner",
+  "approved_artifact": "actor-field-proposal.patch",
+  "approved_patch_sha256": "d62cc8c1a5c0dd75f3b541d5b9a144917a4fe351acfc5d0c21aaee830246763d",
+  "scope": "Exact public GitHub reviewer actor-field expression in the held proposal; preserve every old rejection and actual access/private-data detection",
+  "not_authorised": "Other check corrections, guard changes, direct main push, merge or expanded release actions",
+  "gate_result": "not yet run after correction"
+}

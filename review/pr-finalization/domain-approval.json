@@ -1,0 +1,11 @@
+{
+  "decision": "Approve the exact DOMAIN correction",
+  "human": "Oscar",
+  "source": "Direct human decision relayed by coordinator and recorded in its canonical decision receipt",
+  "decision_receipt_sha256": "57b64b007701c65d3e5e0bd5acab18c4b8b73db709ae8ef2fbca0ccff23445a0",
+  "approved_patch_sha256": "88d8a85c1d2972bac354ccb6d29ea155f4ab9094a0848227e9d2ad292adfc182",
+  "approved_artifact": "domain-identifier-proposal.patch",
+  "scope": "Only public constant DOMAIN plus its one positive control; every existing privacy and rejection rule retained",
+  "release_scope": "Continue review-branch and PR route after gates; main push, merge and deployment remain held",
+  "gate_result": "not yet run after correction"
+}

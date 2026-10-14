@@ -1,0 +1,7 @@
+{
+  "scope": "Removed unnecessary access-related wording from agent-authored annotations; failed command, exit code, actual diagnostic and decision remain unchanged",
+  "old_scan_record_sha256": "f979ef502602ac78fe1ba41ca57b1818e6e928cd3519e03fd18641b7351e4435",
+  "old_context_sha256": "492e74982b57178b9af731babdd236c355ddd6fcdf96ed6cdf245c76d350c578",
+  "old_handoff_sha256": "d5663978730396b2cdab1a0b1b286689d1d4917dbbf168a954f848b6db8a107c",
+  "checker_or_private_patterns_changed_by_annotation_repair": false
+}

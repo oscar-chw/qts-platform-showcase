@@ -1,0 +1,7 @@
+# Current review-package status
+
+The exact field and DOMAIN decisions have direct human approval, pinned in [field approval](approval.json) and [identifier approval](domain-approval.json). The raw proposals and earlier failed records remain. The actor-field implementation rejects other member names and preserves access-wording rejection; [isolated red witness](narrow-boundary-red.json) and [five configured-list controls](field-scope-probes.json) record that scope. The twenty-four original fixture expressions are unchanged. Six additional positive/negative controls give thirty document/control cases.
+
+[After-correction checks](after-correction-checks.json): configured private scan, thirty controls, reading demo, twenty-seven report cases and Ruff pass. The earlier contaminated full-suite result remains a [failed-control record](self-test-control-failure.json), not boundary-test support. [Accepted reporter pins](accepted-source.json) retain its earlier source/real execution/diagram evidence; only the authorised checker and PR preparation changed.
+
+The review branch still needs the existing full repository gate, an open attached PR, both existing CI workflows at its final revision and a completed Codex review at that revision. Missing or pending remote evidence is not acceptance. Main merge and deployment remain for Oscar review. This report checks captured public arithmetic and provenance consistency; private records, distinct counts, present operational health and new performance remain unverified.

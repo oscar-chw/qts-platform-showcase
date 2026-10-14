@@ -1,0 +1,25 @@
+{
+  "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" python3 scripts/check_docs.py",
+  "exit_code": 1,
+  "passed": [
+    "links and fences",
+    "headlines",
+    "arithmetic",
+    "numbers"
+  ],
+  "failed": "configured private-pattern scan",
+  "document": "plan/showcase-workflows.md",
+  "line": 14,
+  "matching_pattern_index": 32,
+  "matches": 2,
+  "public_expression": "GitHub review actor user.login field in the new remote gate",
+  "context": "The field selects the reviewer identity from public GitHub review metadata.",
+  "private_pattern_printed": false,
+  "private_patterns_changed": false,
+  "existing_check_sources_changed": false,
+  "branch_push": "not run",
+  "pr_creation": "not run",
+  "remote_ci": "not run",
+  "hosted_review": "not run",
+  "decision": "Exact human correction required before changing this mandatory control; no rephrasing, encoding or file exclusion."
+}

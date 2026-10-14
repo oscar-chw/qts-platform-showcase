@@ -1,0 +1,17 @@
+{
+  "goal_status": "active",
+  "plan_status": "two of four complete; local preparation held on exact check decision",
+  "pr_text": "pr-body.md",
+  "review_branch": "codex/qts-showcase-pr-20261015",
+  "accepted_source": "e3028e0c4f94c664b560b98c99f29869479ee83a",
+  "coordinator_decision": "Question pending with Oscar; no answer or correction authority yet",
+  "actor_heading_sanitization": {
+    "plan/showcase-workflows.md": 0,
+    "plan/showcase-workflows/03-prepare-the-accepted-public-report-for-a-review-.md": 2
+  },
+  "existing_gate_node_marks": "unchanged by this preparation",
+  "branch_push": "not run",
+  "pr_creation": "not run",
+  "remote_ci": "not run",
+  "hosted_codex_review": "not run"
+}

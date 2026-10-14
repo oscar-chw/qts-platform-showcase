@@ -69,9 +69,11 @@ DOMAIN = r"\b[a-z0-9-]+\.(?:com|net|org|io|cn|hk|ai|dev|xyz|co)\b"
 DOMAIN_OK = {"creativecommons.org", "github.com"}
 ACRONYM = re.compile(r"(?<![\w-])[A-Z][A-Z0-9]{2,}(?![\w-])")
 ACRONYM_OK = {
-    "API", "ACRONYM", "PWD", "CUHK", "QTS", "SQL", "SLA", "README", "LICENSE", "PASS", "FAIL", "ILLUSTRATIVE",
+    "API", "ACRONYM", "DOMAIN", "PWD", "CUHK", "QTS", "SQL", "SLA", "README", "LICENSE", "PASS", "FAIL", "ILLUSTRATIVE",
     "SYNTHETIC", "MIT", "OUTPUT", "CHECK", "PINNED", "NOT", "FORBIDDEN", "TERMS", "FILE", "UTC", "DIAGRAMS",
 }
+# Exact public GitHub actor-field spellings, with prefix and suffix lengths around the key.
+github_actor_fields = (('["user"]["login"]', 10, 2), ("user.login", 5, 0))
 # --- end of pattern lists ---
 # Whole lines, compared exactly: a marker with text after it is not a marker, so nothing can hide on one.
 BLOCK_START = "# --- pattern lists: the only lines of this file the forbidden-terms scan skips ---"
@@ -232,6 +234,14 @@ def check_forbidden(tree, private=PRIVATE):
                     for m in rx.finditer(line):
                         if label == DOMAIN and m.group(0).lower() in DOMAIN_OK:
                             continue
+                        # Permit only the five-character actor key; other matches on this line still block.
+                        if label == "<private pattern>" and m.end() - m.start() == 5 and any(
+                            line[max(0, m.start() - prefix):m.end() + suffix] == field
+                            and (prefix != 5 or m.start() == prefix
+                                 or not re.match(r"\w", line[m.start() - prefix - 1]))
+                            for field, prefix, suffix in github_actor_fields
+                        ):
+                            continue
                         shown = m.group(0) if label != "<private pattern>" else "<redacted>"
                         errors.append(f"{rel}:{n}: forbidden term {shown!r} ({label})")
                 # Code uses capitals for constants, so the shape rule reads prose and config only.
@@ -282,6 +292,7 @@ def self_test():
         ("control", None, None),
         ("working-directory variable", None, append("docs/data-model.md", "\nThe shell uses ${PWD} as its working directory.\n")),
         ("checker expression name", None, append("docs/data-model.md", "\nThe Python checker names its expression ACRONYM.\n")),
+        ("domain expression name", None, append("docs/data-model.md", "\nThe Python checker names its expression DOMAIN.\n")),
         ("broken link", "links and fences", edit("README.md", "(docs/data-model.md)", "(docs/missing.md)")),
         ("broken anchor", "links and fences", edit("README.md", "results.md#scale", "results.md#no-such-heading")),
         ("unclosed fence", "links and fences", append("docs/reliability.md", "\n```text\nnever closed\n")),
@@ -291,6 +302,17 @@ def self_test():
         ("label drift", "headlines", edit("README.md", "| 1.49× slower | Test |", "| 1.49× slower | Live |")),
         ("README-only figure", "numbers", edit("README.md", "discarding **113,180**", "discarding **113,181**")),
         ("miscomputed total", "arithmetic", edit("docs/results.md", "| 43,446,124,248 |", "| 43,446,124,249 |")),
+        ("public bracket actor field", None,
+         append("docs/data-model.md", "\nGitHub review uses " + github_actor_fields[0][0] + ".\n")),
+        ("public dotted actor field", None,
+         append("docs/data-model.md", "\nGitHub review uses " + github_actor_fields[1][0] + ".\n")),
+        ("different member is not the public actor field", "forbidden terms",
+         append("docs/data-model.md", "\nA record uses x" + github_actor_fields[1][0] + ".\n")),
+        ("actor key used as access wording", "forbidden terms",
+         append("docs/data-model.md", "\nAccess uses " + github_actor_fields[1][0][-5:] + ".\n")),
+        ("actor field cannot hide access wording", "forbidden terms",
+         append("docs/data-model.md", "\nGitHub review uses " + github_actor_fields[0][0]
+                + "; access uses " + github_actor_fields[1][0][-5:] + ".\n")),
         # Every planted term is made up, so the fixtures describe nothing real. Each is assembled
         # at run time, because this file is scanned too and must not match its own fixtures.
         ("generic word", "forbidden terms", append("docs/data-model.md", "\nThe job asked for 4096 thr" + "eads.\n")),
@@ -321,6 +343,8 @@ def self_test():
     # A scratch private list proves the private-file path works whether or not the real one exists.
     private = os.path.join(base, "private-terms.txt")
     open(private, "w", encoding="utf-8").write("# scratch\n\\bzzhw" + "term\\b\n\\bzzaccess" + "term\\b\n")
+    with open(private, "a", encoding="utf-8") as file:
+        file.write(r"\b" + re.escape(github_actor_fields[1][0][-5:]) + r"\b" + "\n")
     privates = {"empty": os.path.join(base, "empty-terms.txt"), "missing": os.path.join(base, "absent.txt")}
     open(privates["empty"], "w", encoding="utf-8").write("# only comments\n   # an indented one\n\n")
     bad = 0
