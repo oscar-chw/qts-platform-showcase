@@ -1,0 +1,238 @@
+{
+  "source_sha256": "a73f4c402f2f3370eebfa10d6b781a902644e4e07d8bdf5823e476e2e1d4455b",
+  "tests_sha256": "ec2d2572a9152a583e7e615a24e00444c413ab975e4c441f388042ce76f196e1",
+  "python_version": "3.9.6",
+  "cases": [
+    {
+      "case": "control",
+      "exit_code": 0,
+      "witness": null,
+      "expected_outcome": "pass",
+      "test_source_unchanged": true,
+      "case_count": 42,
+      "mutation_sites": 0,
+      "implementation_sha256": "a73f4c402f2f3370eebfa10d6b781a902644e4e07d8bdf5823e476e2e1d4455b"
+    },
+    {
+      "case": "drop_crypto",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "a66c6508048a937f011f802d8fc6a32ca84442c1103f3c427802eaac8e0b1976"
+    },
+    {
+      "case": "constant_digest",
+      "exit_code": 1,
+      "witness": "test_content_digest_changes_on_editorial_change",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "1a8976af0c0ce834e56c794b0337830334cba7892c35d17c0b5b94f901c39ca5"
+    },
+    {
+      "case": "claim_private_verified",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "7d4fe124625f7561e0678ac9f22adab005157ae5db202ff6b43fefe061b84321"
+    },
+    {
+      "case": "reread_caller",
+      "exit_code": 1,
+      "witness": "test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "85c0cbcaee77bdfc835bb271b50dc64ac9880580535a8b8467c4f1c2f09a5da2"
+    },
+    {
+      "case": "ignore_arithmetic",
+      "exit_code": 1,
+      "witness": "test_inconsistent_computed_sum_is_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 2,
+      "implementation_sha256": "dc0a49e592f812f7a15ac12c0f6a2747b21906a9c7caa0794bbbcf4cbdea3f99"
+    },
+    {
+      "case": "ignore_result_source",
+      "exit_code": 1,
+      "witness": "test_headline_date_must_match_raw_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "2b468cff7dc0935307ba6979d6890c6a6800036c17afce24ece32ecdf2809ccd"
+    },
+    {
+      "case": "accept_duplicate_result_rows",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_rows_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "a21355f8e4c936aa9c3303b835fe66fde4edbf366146be6e424c4b3e5baacf3e"
+    },
+    {
+      "case": "accept_duplicate_result_sections",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_sections_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "79508552b9b5fbe986103374452372f1f16983c6e295b9fdfeab9d58c7cfc89b"
+    },
+    {
+      "case": "accept_missing_source_name",
+      "exit_code": 1,
+      "witness": "test_source_names_cannot_be_empty_with_valid_matching_dates",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 2,
+      "implementation_sha256": "12a199b99fe824d3f7b16dc0d8fec32b753af7197dfcf38cae7162749194f21f"
+    },
+    {
+      "case": "stop_after_first_table",
+      "exit_code": 1,
+      "witness": "test_later_tables_cannot_hide_duplicate_consumed_rows",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "80bbf3e36b3a353bd542fadff1e30fc8aee8e7e2ea5e863bf84f4478ab07b104"
+    },
+    {
+      "case": "ignore_headline_removal_source",
+      "exit_code": 1,
+      "witness": "test_cleansing_removal_result_sources_must_match_contributing_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "2c8317bd1386070549c657a18d2289b266d20817fc51afa63d4505effb218c20"
+    },
+    {
+      "case": "ignore_scale_removal_source",
+      "exit_code": 1,
+      "witness": "test_cleansing_removal_result_sources_must_match_contributing_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "c93857b7cb0572a391f4c97d6d3fb1865e98c6b3610deb02b07e5174f99de9b1"
+    },
+    {
+      "case": "ignore_auxiliary_source_validity",
+      "exit_code": 1,
+      "witness": "test_removal_reference_role_does_not_excuse_missing_name_or_date",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "bbc65c939742eac6c8094f158b9a2f5e38e45a96d736f6ff5eaa1de4f8894153"
+    },
+    {
+      "case": "ignore_fenced_code",
+      "exit_code": 1,
+      "witness": "test_code_headings_cannot_hide_later_duplicate_rows",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "045126408289b767d739f3c516763b8b6077bb2cd785689539c0f7808cf6103e"
+    },
+    {
+      "case": "ignore_indented_code",
+      "exit_code": 1,
+      "witness": "test_examples_inside_consumed_sections_cannot_override_arithmetic",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "91b54cb43ec490142db58e6e9ad66c5d09cd0e1c871ba47e426ba3e63c92f6e9"
+    },
+    {
+      "case": "allow_missing_removal_roles",
+      "exit_code": 1,
+      "witness": "test_removal_citations_require_each_role_exactly_once",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "fc9fa36db63265465aadc93a6fa70819b306cd7f9bb829bca90b06050cf9ede7"
+    },
+    {
+      "case": "allow_repeated_removal_roles",
+      "exit_code": 1,
+      "witness": "test_removal_citations_require_each_role_exactly_once",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "68aa7ac3ded2e8b2330a074774ace93e4734aec95b471c5d3e44d5049c6afcac"
+    },
+    {
+      "case": "arithmetic_reads_literal_code",
+      "exit_code": 1,
+      "witness": "test_examples_inside_consumed_sections_cannot_override_arithmetic",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "c5d7ac7c5a04a22c17056f8a2ccee364b6a591226ccc2f9d7223cc10fe7cf0fc"
+    },
+    {
+      "case": "mention_instead_of_complete_value",
+      "exit_code": 1,
+      "witness": "test_negated_or_obsolete_result_values_do_not_verify",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "0a4d6ad9fab3685df5d244f633afa300620a90e435973f80c002e134db18418c"
+    },
+    {
+      "case": "ignore_rounded_measure",
+      "exit_code": 1,
+      "witness": "test_rounded_headline_components_cannot_be_negated",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "fbc94d5e7d52e72eaaf64943340eeb29573a861a91eb4b486e68dfd1198c8592"
+    },
+    {
+      "case": "ignore_threshold_wording",
+      "exit_code": 1,
+      "witness": "test_threshold_prose_cannot_negate_or_obsolete_values",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "6aa252d5e312420ea094ed06e79cafbbb208cb9931e8dd13f858116f0d3b2e3f"
+    },
+    {
+      "case": "skip_heading_normalization",
+      "exit_code": 1,
+      "witness": "test_supported_heading_spelling_keeps_report_values",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "f6748cacca63c4c83236b3a1d7e82fc6e03f983348f0f495ec82efddec889e07"
+    }
+  ],
+  "scope": "eighteen earlier defect classes adapted plus four complete-value/heading defects; full same-run control and one unchanged causal test per defect; arithmetic bypass changes both validating sites"
+}

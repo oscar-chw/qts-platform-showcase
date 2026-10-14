@@ -67,7 +67,12 @@ Indented and fenced code examples cannot start/end sections or contribute table 
 fence recognition follow the relevant [CommonMark definitions](https://github.com/commonmark/commonmark-spec/blob/0.31.2/spec.txt).
 The report accepts the declared heading and pipe-table format; it does not provide a general Markdown renderer.
 The original bytes bind the digest. The arithmetic reader receives a deterministic view of that
-same captured input with literal code examples excluded; it never rereads the caller's file.
+same captured input with literal code examples excluded and accepted headings normalized; it
+never rereads the caller's file. Derived Result cells, the rounded stored-row Measure and the
+threshold-calculation paragraph use the canonical wording in [results.md](results.md), with
+their complete values recomputed from the raw counts. An expected number mentioned as negated,
+obsolete or inside other unsupported wording does not count as agreement. Other editorial text
+is outside these declared arithmetic fields; the report does not infer truth from free-form prose.
 
 | Failure | Reported code | Recovery |
 |---|---|---|
@@ -130,7 +135,7 @@ flowchart LR
     capture["capture bounded bytes once"]
     hash["digest of captured bytes"]
     fields["required counts and dated sources"]
-    arithmetic["existing arithmetic checks<br/>on a temporary captured copy"]
+    arithmetic["complete derived-value comparisons<br/>and existing arithmetic checks"]
     error["named error;<br/>no report on standard output"]
     report["structured counts, digest<br/>and verification boundaries"]
     input --> capture
@@ -143,10 +148,12 @@ flowchart LR
     hash --> report
 ```
 
-The implementation reuses the [existing figure parser and arithmetic](../scripts/figures.py).
-That checker accepts a file path, so the new program supplies a temporary copy of the captured
-bytes. It avoids checking a second read of a caller's file while hashing the first. The copy is
-removed on success or failure. [Acceptance cases](../tests/test_evidence_report.py) include a
+The implementation compares the complete declared derived fields and reuses the
+[existing figure parser and arithmetic](../scripts/figures.py) as an additional check. That checker
+accepts a file path, so the program supplies a deterministic view of the captured input, excluding
+code examples and normalizing accepted headings. The digest binds the original bytes. This avoids
+checking a second read of a caller's file while hashing the first. The temporary view is removed
+on success or failure. [Acceptance cases](../tests/test_evidence_report.py) include a
 deterministic change to the caller's file between capture and checking; the result remains bound
 to the original captured bytes.
 

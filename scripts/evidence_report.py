@@ -60,6 +60,9 @@ def markdown_lines(text):
             continue
         if len(re.match(r"[ \t]*", line)[0].expandtabs(4)) >= 4:
             continue
+        heading = re.fullmatch(r" {0,3}##(?:[ \t]+(.*))?", line)
+        if heading:
+            line = "## " + re.sub(r"[ \t]+#+[ \t]*$", "", heading[1] or "").strip()
         yield line
 
 
@@ -151,6 +154,41 @@ def removal_source(reference, expected):
         raise ReportError("inconsistent_sources", "Removal references are incomplete or name a different count snapshot")
 
 
+def arithmetic_values(text, counts, stored, removed, scale, read_row):
+    ashare = sum(counts[name]["count"] for name in ASHARE)
+    crypto = sum(counts[name]["count"] for name in CRYPTO)
+    typed = counts[TYPED]["count"]
+    total = ashare + crypto
+    difference = typed - ashare
+    rate = f"{difference / typed * 100:.2f}%"
+    headline = "700B+" if total >= 700e9 else "below 700B"
+    expected = [
+        (stored[0], f"Stored market-data rows: A-share cleansed ({ashare / 1e9:.1f}B) plus crypto stored ({crypto / 1e9:.1f}B)"),
+        (stored[1], headline),
+        (removed[1], rate),
+        (result_row(scale, "A-share rows, cleansed", prefix=True)[1], f"{ashare:,}"),
+        (result_row(scale, "Crypto rows, stored", prefix=True)[1], f"{crypto:,}"),
+        (result_row(scale, "Sum of the two, stored rows", prefix=True)[1], f"{total:,}, stated as {headline}"),
+        (result_row(scale, "A-share rows removed by cleansing", prefix=True)[1], f"{difference:,} of {typed:,}, which is {rate}"),
+        (read_row[1], f"{sum(counts[name]['count'] for name in READS):,}, with 0 errors and 0 mismatches against the version each read had pinned"),
+    ]
+    why = (
+        "**Why 700B+ counts stored rows, not distinct ones.** The crypto figure counts stored rows. At the "
+        "cited snapshot, its cleansed view was meant to leave out exact duplicates but did not exclude them, "
+        "so it held the same count; no count of crypto duplicates was recorded, and the source described "
+        "a re-cleanse in progress. These records do not establish its present completion. How many of the "
+        "stored rows are distinct is therefore unmeasured. As a count of distinct "
+        f"rows, 700B holds only if fewer than {(total - 700e9) / crypto * 100:.1f}% of the crypto rows are exact duplicates ({total / 1e9:.2f}B minus "
+        f"700B leaves {(total - 700e9) / 1e9:.2f}B of the {crypto / 1e9:.2f}B). The conservative floor is 650B, which holds unless more than "
+        f"{(total - 650e9) / crypto * 100:.1f}% of them are ({total / 1e9:.2f}B minus 650B leaves {(total - 650e9) / 1e9:.2f}B). For comparison, A-share cleansing found {rate} "
+        "exact duplicates. No row is counted twice: the A-share typed layer is a separate copy and is not "
+        "added. The crypto counts are a snapshot, not final."
+    )
+    paragraphs = [p for p in "\n".join(markdown_lines(text)).split("\n\n") if p.startswith("**Why 700B+")]
+    if any(actual != value for actual, value in expected) or len(paragraphs) != 1 or " ".join(paragraphs[0].split()) != why:
+        raise ReportError("inconsistent_arithmetic", "Derived values must match the declared wording and their raw counts")
+
+
 def report(path):
     blob, text = read_snapshot(path)
     counts = raw_counts(text)
@@ -174,6 +212,7 @@ def report(path):
             raise ReportError("inconsistent_sources", "Scale result and raw counts refer to different source snapshots")
     scale_removed = result_row(scale, "A-share rows removed by cleansing", prefix=True)
     removal_source(scale_removed[3], stored_source)
+    arithmetic_values(text, counts, stored, removed, scale, read_row)
     # Derive the arithmetic view from the captured input, excluding literal code examples.
     # The original bytes still bind provenance; the caller file is never read a second time.
     try:

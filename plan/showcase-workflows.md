@@ -29,7 +29,8 @@ Done-condition: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bas
 - [x] 7. Respect Markdown code boundaries and require all removal citation roles | needs: 6 | ctx: review/pr-finalization/third-repair.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
       2026-10-14T20:47:44Z exit 0 in 10s [f0310ab2] — PASS  private-code / PASS  history / qts-platform-showcase: PASS (0 failed)
 
-- [>] 8. Compare complete derived values and normalize supported headings at the arithmetic seam | needs: 7 | ctx: review/pr-finalization/fourth-repair.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T21:00:42Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+- [>] 8. Compare complete derived values and normalize supported headings at the arithmetic seam | needs: 7 | ctx: review/pr-finalization/fourth-repair.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T21:11:56Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+      2026-10-14T21:11:24Z exit 1 in 12s [f9911187] — PASS  private-code / PASS  history / qts-platform-showcase: FAIL (1 failed)
 
 ## Evidence-report scope
 
