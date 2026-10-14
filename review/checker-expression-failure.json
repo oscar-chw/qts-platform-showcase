@@ -1,0 +1,18 @@
+{
+  "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" bash scripts/check.sh",
+  "exit_code": 1,
+  "passed": [
+    "links and fences",
+    "headlines",
+    "arithmetic",
+    "numbers"
+  ],
+  "failure": "review/working-directory-proposal.patch:5; ACRONYM is a possible vendor/hardware name",
+  "cause": "The preserved approved patch includes an existing Python constant in its unified-diff context. Code identifiers were allowed in the source .py file but inspected as prose in the .patch artifact.",
+  "approved_first_patch_applied": true,
+  "first_patch_sha256": "63674750e7f74835e4b6c1eed0887c6e9a04ec7c9c9721e6f3b33f28397d89e6",
+  "followup_proposal": "review/checker-expression-proposal.patch",
+  "followup_applied": false,
+  "privacy_rejection_controls_changed": false,
+  "full_audit": "not run"
+}

@@ -1,0 +1,9 @@
+{
+  "actor_heading_sanitization": {
+    "plan/showcase-workflows.md": 0,
+    "plan/showcase-workflows/01-document-a-researcher-workflow-evidence-boundari.md": 6
+  },
+  "node_marks_gates_and_lease_owner": "preserved",
+  "context_pointer": "corrected to one existing guide file instead of a nonexistent combined path",
+  "purpose": "public metadata hygiene and a usable cold-start context; no check change"
+}

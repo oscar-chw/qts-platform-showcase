@@ -1,0 +1,38 @@
+{
+  "base": "b8194631965266679dbb87b04dbcfde6b1a48307",
+  "checker_changes": "exactly the two approved identifier additions and their positive controls",
+  "original_rejection_cases": "all 20 preserved byte-for-byte",
+  "original_positive_cases": "both preserved",
+  "self_test": {
+    "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" bash scripts/check.sh",
+    "exit_code": 0,
+    "cases": 24,
+    "positive_controls": 4,
+    "negative_controls": 20,
+    "wrong_outcomes": 0,
+    "scope": "each planted defect matched its exact expected failing check; ordinary identifier controls matched no failures"
+  },
+  "document_checks": {
+    "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" python3 scripts/check_docs.py",
+    "exit_code": 0,
+    "checks": [
+      "links and fences",
+      "headlines",
+      "arithmetic",
+      "numbers",
+      "forbidden terms"
+    ]
+  },
+  "public_example": {
+    "command": "bash scripts/demo.sh",
+    "exit_code": 0,
+    "input": "docs/results.md raw-count table",
+    "computed_stored_sum": 704009291430,
+    "computed_concurrency_reads": 1111,
+    "scope": "published arithmetic only; no private dataset query"
+  },
+  "checker_sha256": "3c9a2a6a0a11b5ca613b24605f6628365a3d4f42d6e59aa764f582c0b8aefa80",
+  "full_repo_audit": "pending",
+  "independent_acceptance": "pending",
+  "publication": "held"
+}

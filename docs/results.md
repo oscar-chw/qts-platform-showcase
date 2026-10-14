@@ -4,7 +4,8 @@ Every number on this page comes from a dated source document, cited by **title a
 documents themselves are private to the society; [Sources](#sources) lists what each one is. Each
 figure carries one of two labels:
 
-- **Live**: read from the running platform during normal or busy work.
+- **Live**: read from the running platform during normal or busy work on the cited date. It is a
+  historical source classification, not a current status feed.
 - **Test**: a deliberate benchmark, gate or review measurement, on the running platform or on a
   stated sample of its data.
 
@@ -13,6 +14,11 @@ file behind it. **Speed is given only as ratios** between two routes or two vers
 the same machine. Absolute timings are left out on purpose, because with a known data size they
 would reveal how fast the machine is. There is no uptime or SLA figure, because no availability
 measurement exists that would support one.
+
+The local [evidence example](research-workflow.md#run-the-public-evidence-example) checks the
+arithmetic and document consistency of these published records. It does not re-query the private
+platform or establish present service health. Source-snapshot reconciliation remains necessary
+before promoting the derived cleansing-removal count to a separate achievement.
 
 ## Headline numbers
 
@@ -57,10 +63,11 @@ own arithmetic.
 | A-share rows removed by cleansing (typed layer minus cleansed layer, both covering the same days), all exact duplicates | 514,396,607 of 566,464,087,478, which is 0.09% | Live | table counts, 2026-10-05 (counts); table counts, 2026-10-03 (day ranges); data platform design, 2026-09-28 (only exact duplicates are removed) |
 | A-share history covered | 2,361 trading days of trades from 2017-01-03 to 2026-09-28 in the wiki build of 2026-10-01; the table counts of 2026-10-03 run to 2026-09-30 | Live | researcher wiki, pipeline and cleansing pages, built 2026-10-01 |
 
-**Why 700B+ counts stored rows, not distinct ones.** The crypto figure counts stored rows. Its
-cleansed view is meant to leave out exact duplicates but does not exclude them yet, so today it
-holds the same count; no count of crypto duplicates has been recorded, and a re-cleanse is in
-progress. How many of the stored rows are distinct is therefore unmeasured. As a count of distinct
+**Why 700B+ counts stored rows, not distinct ones.** The crypto figure counts stored rows. At the
+cited snapshot, its cleansed view was meant to leave out exact duplicates but did not exclude them,
+so it held the same count; no count of crypto duplicates was recorded, and the source described
+a re-cleanse in progress. These records do not establish its present completion. How many of the
+stored rows are distinct is therefore unmeasured. As a count of distinct
 rows, 700B holds only if fewer than 2.9% of the crypto rows are exact duplicates (704.01B minus
 700B leaves 4.01B of the 138.06B). The conservative floor is 650B, which holds unless more than
 39.1% of them are (704.01B minus 650B leaves 54.01B). For comparison, A-share cleansing found 0.09%

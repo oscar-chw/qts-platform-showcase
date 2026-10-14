@@ -1,0 +1,8 @@
+{
+  "approved_patch_exact": true,
+  "original_rejection_controls_byte_preserved": true,
+  "other_existing_scripts_byte_unchanged": true,
+  "candidate_check_sha256": "e4b550756bd0ba0bbaa06ffd19b9f992f5289714f99be612188a1631b3280434",
+  "followup_correction": "not applied",
+  "full_behavioral_controls": "not run; false-positive decision pending"
+}

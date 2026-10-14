@@ -69,7 +69,7 @@ DOMAIN = r"\b[a-z0-9-]+\.(?:com|net|org|io|cn|hk|ai|dev|xyz|co)\b"
 DOMAIN_OK = {"creativecommons.org", "github.com"}
 ACRONYM = re.compile(r"(?<![\w-])[A-Z][A-Z0-9]{2,}(?![\w-])")
 ACRONYM_OK = {
-    "API", "CUHK", "QTS", "SQL", "SLA", "README", "LICENSE", "PASS", "FAIL", "ILLUSTRATIVE",
+    "API", "ACRONYM", "PWD", "CUHK", "QTS", "SQL", "SLA", "README", "LICENSE", "PASS", "FAIL", "ILLUSTRATIVE",
     "SYNTHETIC", "MIT", "OUTPUT", "CHECK", "PINNED", "NOT", "FORBIDDEN", "TERMS", "FILE", "UTC", "DIAGRAMS",
 }
 # --- end of pattern lists ---
@@ -280,6 +280,8 @@ def self_test():
 
     cases = [
         ("control", None, None),
+        ("working-directory variable", None, append("docs/data-model.md", "\nThe shell uses ${PWD} as its working directory.\n")),
+        ("checker expression name", None, append("docs/data-model.md", "\nThe Python checker names its expression ACRONYM.\n")),
         ("broken link", "links and fences", edit("README.md", "(docs/data-model.md)", "(docs/missing.md)")),
         ("broken anchor", "links and fences", edit("README.md", "results.md#scale", "results.md#no-such-heading")),
         ("unclosed fence", "links and fences", append("docs/reliability.md", "\n```text\nnever closed\n")),

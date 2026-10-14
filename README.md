@@ -2,9 +2,9 @@
 
 [![ci](https://github.com/oscar-chw/qts-platform-showcase/actions/workflows/ci.yml/badge.svg)](https://github.com/oscar-chw/qts-platform-showcase/actions/workflows/ci.yml) [![lint](https://github.com/oscar-chw/qts-platform-showcase/actions/workflows/lint.yml/badge.svg)](https://github.com/oscar-chw/qts-platform-showcase/actions/workflows/lint.yml)
 
-A university quant society's research team needed tick-level market data it could trust and query
-in seconds. As the team's sole developer, Oscar Choi built the platform that serves it: an
-ingestion and cleansing pipeline plus a versioned reader library over **700B+ rows** (A-share and
+A university quant society's research team needed tick-level market data it could trust, query and
+revisit on the same version. As the team's sole developer, Oscar Choi built the platform that serves
+it: an ingestion and cleansing pipeline plus a versioned reader library over **700B+ rows** (A-share and
 crypto, stored, as of 2026-10-05). Cleansing flags rows instead of dropping them, after a time
 filter was found silently discarding **113,180** closing-auction trades in one day; the only rows
 it removes are exact duplicates, **0.09%**.
@@ -123,8 +123,9 @@ Each decision in full, with what it cost: [data-model.md](docs/data-model.md#dec
 | Dataset commits on a small test dataset (420,000 rows) while 12 readers and 5 writers shared it | 23/23 commits, 0 lost | Test | concurrency gate results, 2026-09-23 |
 | Whole-market day, warm: the query interface against hand-written DuckDB SQL | 1.49× slower | Test | data API benchmark, 2026-09-30 |
 
-**Live**: read from the running platform. **Test**: a deliberate benchmark or gate. Speed is given
-only as ratios; absolute timings are left out on purpose. Why 700B+ counts stored rows, not
+**Live**: read from the running platform on the stated source date. **Test**: a deliberate
+benchmark or gate. These are historical records, not current service-health readings. Speed is
+given only as ratios; absolute timings are left out on purpose. Why 700B+ counts stored rows, not
 distinct ones: [results.md](docs/results.md#scale).
 
 Three data-reading steps, timed by a scripted walkthrough of a researcher's work before and after a
@@ -143,6 +144,11 @@ refusal, and it is published on purpose. Every figure, with its caveats:
 bash scripts/demo.sh    # re-derives every computed figure in docs/results.md from its raw counts
 bash scripts/check.sh   # adds the document checks (links, headline table, figures, terms) and their self-test
 ```
+
+Python and a shell are sufficient; the scripts use the standard library. The demo's input is the
+published raw-count table; its output is the recomputed totals with a success or disagreement for
+each. For a concrete example, and a guide to choosing layers, pinning a request and handling
+missing observations, read [the researcher workflow](docs/research-workflow.md).
 
 There is no platform code here to run: this is a write-up. To read it in under five minutes,
 start with [results.md](docs/results.md). To run the ideas rather than read about them, see the
@@ -164,10 +170,12 @@ Docs: see [docs/README.md](docs/README.md).
   numbers rest on dated private records, described in [results.md](docs/results.md#sources).
 - **The stand-in is not the platform.** [qts-platform-demo](https://github.com/oscar-chw/qts-platform-demo)
   is an independent re-implementation written only from this write-up; it shares none of the
-  platform's code, runs on SYNTHETIC data at toy scale, and shows the ideas and none of its numbers.
+  platform's code, runs on small SYNTHETIC fixtures, and demonstrates versioning and query behavior
+  without reproducing the private platform's scale or timings.
 - **No uptime or SLA figure.** No availability measurement exists that would support one.
 - **The crypto count is a snapshot, not final**, and its exact-duplicate count was not recorded,
-  so the number of distinct rows behind 700B+ is unmeasured; a re-cleanse is in progress.
+  so the number of distinct rows behind 700B+ is unmeasured. The dated source reported a re-cleanse
+  in progress; its present completion is not established here.
 - **The query-fix ratios and the researcher-step ratios come from write-ups' tables** rather than
   raw per-run files, and the first query on a new nightly version, which rebuilds the cache, was not timed.
 - **No researcher count or usage figure is reported**, because no dated record of one exists. The

@@ -1,0 +1,7 @@
+{
+  "command": "git diff --cached --check",
+  "exit_code": 2,
+  "finding": "The preserved original proposal patch contains one ordinary unified-diff blank context line with a trailing space.",
+  "scope": "artifact syntax, not changed implementation; exact approved patch bytes preserved",
+  "implementation_diff_check": "checked separately without modifying the evidence artifact"
+}
