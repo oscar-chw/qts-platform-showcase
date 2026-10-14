@@ -198,6 +198,63 @@ class EvidenceReportTests(unittest.TestCase):
                     self.edit(row, row.replace(reference, invalid))
                     self.reject("inconsistent_sources")
 
+    def test_code_headings_cannot_hide_later_duplicate_rows(self):
+        cases = [("Raw counts", "A-share cleansed orders", "invalid_counts"),
+                 ("Headline numbers", "Stored market-data rows", "inconsistent_arithmetic"),
+                 ("Scale", "Sum of the two, stored rows", "inconsistent_arithmetic"),
+                 ("Concurrency", "Reads |", "inconsistent_arithmetic")]
+        code_lines = ["    ## note", "\t## note", "```text\n## note\n```",
+                      "~~~text\n## note\n~~~", "````text\n## note\n`````",
+                      "   ```text\n## note\n   ```"]
+        for heading, prefix, code in cases:
+            for example in code_lines:
+                with self.subTest(heading=heading, example=example):
+                    self.path.write_bytes(self.original)
+                    lines = self.path.read_text().splitlines()
+                    start = lines.index("## " + heading)
+                    stop = next((i for i in range(start + 1, len(lines)) if lines[i].startswith("## ")), len(lines))
+                    row = next(line for line in lines[start + 1:stop] if line.startswith("| " + prefix))
+                    cells = row.split("|")
+                    cells[2] = " contradictory value "
+                    lines[stop:stop] = ["", example, "", "| Measure | Value | Label | Source |",
+                                        "|---|---|---|---|", "|".join(cells), ""]
+                    self.path.write_text("\n".join(lines) + "\n")
+                    self.reject(code)
+
+    def test_code_examples_do_not_count_as_tables_or_sections(self):
+        row = "| A-share cleansed orders | 1 | table counts, 2026-10-05 |"
+        literal = "## Raw counts\n\n| Count | Value | Source |\n|---|---|---|\n" + row
+        examples = ["\n".join("    " + line for line in literal.splitlines()),
+                    "\n".join("\t" + line for line in literal.splitlines()),
+                    "```text\n" + literal + "\n```", "~~~text\n" + literal + "\n~~~",
+                    "````text\n" + literal + "\n`````", "   ```text\n" + literal + "\n   ```"]
+        for example in examples:
+            with self.subTest(example=example):
+                self.path.write_bytes(self.original)
+                with self.path.open("a") as file:
+                    file.write("\n\n" + example + "\n")
+                report = self.success()
+                self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
+    def test_removal_citations_require_each_role_exactly_once(self):
+        reference = "table counts, 2026-10-05 (counts)"
+        day_ranges = "table counts, 2026-10-03 (day ranges)"
+        rule = "data platform design, 2026-09-28 (only exact duplicates are removed)"
+        sources = ["table counts, 2026-10-05", reference, reference + "; " + day_ranges,
+                   reference + "; " + rule, reference + "; " + day_ranges + "; " + day_ranges + "; " + rule,
+                   reference + "; " + day_ranges + "; " + rule + "; " + rule,
+                   reference + "; " + day_ranges + "; " + rule.replace("only exact duplicates are removed", "other rule")]
+        for source in sources:
+            with self.subTest(source=source):
+                self.path.write_bytes(self.original)
+                row = next(line for line in self.path.read_text().splitlines()
+                           if line.startswith("| A-share rows removed by cleansing"))
+                cells = row.split("|")
+                cells[4] = " " + source + " "
+                self.edit(row, "|".join(cells))
+                self.reject("inconsistent_sources")
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):

@@ -11,3 +11,7 @@ Hosted review completed at ae8cc39 with two valid input-refusal findings; source
 ## Released 2026-10-14T20:05:36Z — local author
 
 Second hosted review at0dc found later-table ambiguity and missing cleansing-removal reference binding; ordinary repair and fresh review required.
+
+## Released 2026-10-14T20:31:58Z — local author
+
+Third hosted review at85f found code headings truncating section scans and missing required auxiliary citations; ordinary repair and fresh review required.

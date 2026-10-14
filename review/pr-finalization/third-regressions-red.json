@@ -1,0 +1,14 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py",
+  "exit_code": 1,
+  "case_count": 36,
+  "failing_subcases": 37,
+  "methods": [
+    "test_code_examples_do_not_count_as_tables_or_sections",
+    "test_code_headings_cannot_hide_later_duplicate_rows",
+    "test_removal_citations_require_each_role_exactly_once"
+  ],
+  "source_sha256": "2d157c7153ae6cadc742d1a6f04038c75006dc0e24e170ce3a6441f9b2000c18",
+  "tests_sha256": "db05272c84b19d730ef59af0a293c8e070306e77a8b78161563ba96f346a62a0",
+  "scope": "Actual prior command accepts hidden contradictory rows and missing or repeated citation roles, and rejects literal code examples"
+}

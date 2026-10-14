@@ -1,0 +1,5 @@
+# Markdown boundaries and citation completeness
+
+Third hosted review `5524232158` at `85f4afcbc6cdff99065b443f12ffa9f0479cf91c` found [code headings hiding later rows](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4275907086) and [missing auxiliary citations](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4275907096). Both reproduce on the actual prior command. Section boundaries must follow real Markdown headings, excluding indented and fenced code. Code examples also must not add apparent tables or duplicate sections. The scale removal row's named count, day-range and exact-duplicate-rule citations must each occur once; their distinct dates remain valid.
+
+Done when these cases go red before the repair and pass afterward, all thirty-three previous test methods and published inputs remain byte-identical, and the same original repository gate plus fresh revision-bound CI/review pass. Preserve earlier source/failed receipts. The new parser remains limited to the report's heading and pipe-table contract; no dependency or arbitrary Markdown renderer is added.
