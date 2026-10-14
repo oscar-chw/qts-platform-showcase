@@ -34,7 +34,7 @@ Done-condition: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bas
       2026-10-14T21:11:24Z exit 1 in 12s [f9911187] — PASS  private-code / PASS  history / qts-platform-showcase: FAIL (1 failed)
       2026-10-14T21:12:11Z exit 0 in 13s [f0310ab2] — PASS  private-code / PASS  history / qts-platform-showcase: PASS (0 failed)
 
-- [>] 9. Refuse ambiguous container-prefixed fence openers without losing evidence rows | needs: 8 | ctx: review/pr-finalization/fifth-repair.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T21:30:35Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+- [>] 9. Refuse ambiguous marker-prefixed fence openers without losing evidence rows | needs: 8 | ctx: review/pr-finalization/fifth-repair.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T21:30:35Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
 
 ## Evidence-report scope
 

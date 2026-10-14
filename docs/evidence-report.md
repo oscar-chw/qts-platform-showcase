@@ -66,6 +66,10 @@ remain one declared count set under a three-cell header; another header or count
 Indented and fenced code examples cannot start/end sections or contribute table rows. Heading and
 fence recognition follow the relevant [CommonMark definitions](https://github.com/commonmark/commonmark-spec/blob/0.31.2/spec.txt).
 The report accepts the declared heading and pipe-table format; it does not provide a general Markdown renderer.
+Fence openers must stand on their own line with at most three leading spaces. Openers on a list
+or quotation marker line, and raw markup blocks outside supported code, produce a named format
+refusal; they cannot suppress later evidence. Literal examples inside an already-open supported
+fence remain opaque.
 The original bytes bind the digest. The arithmetic reader receives a deterministic view of that
 same captured input with literal code examples excluded and accepted headings normalized; it
 never rereads the caller's file. Derived Result cells, the rounded stored-row Measure and the

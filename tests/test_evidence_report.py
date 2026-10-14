@@ -378,6 +378,16 @@ class EvidenceReportTests(unittest.TestCase):
                 self.path.write_text("\n".join(lines) + "\n")
                 self.reject("inconsistent_arithmetic")
 
+    def test_literal_markup_in_supported_code_is_not_report_data(self):
+        for fence in ["```", "~~~"]:
+            with self.subTest(fence=fence):
+                self.path.write_bytes(self.original)
+                literal = fence + "text\n<pre>\n## Raw counts\n</pre>\n" + fence + "\n"
+                self.edit("## Raw counts\n", "## Raw counts\n\n" + literal)
+                report = self.success()
+                self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):

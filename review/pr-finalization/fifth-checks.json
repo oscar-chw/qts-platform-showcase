@@ -1,0 +1,34 @@
+{
+  "commands": [
+    {
+      "command": "bash scripts/check.sh",
+      "exit_code": 0,
+      "report_cases": 47,
+      "report_duration_seconds": 8.144,
+      "document_controls": 30,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m unittest discover -s tests -p test_evidence_report.py",
+      "exit_code": 0,
+      "report_cases": 47,
+      "report_duration_seconds": 8.27,
+      "document_controls": null,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m ruff check --config ruff.toml .",
+      "exit_code": 0,
+      "report_cases": null,
+      "document_controls": null,
+      "legacy_resource_warning": false
+    }
+  ],
+  "source_sha256": "624a041f7ef6b78f5a8723c42188d8bd15f710d24e3dedb0f3855fd0b9681d3c",
+  "tests_sha256": "221796211467f02ae1294f7f7e04446081ff744efbf5f8e2b1b59426d9d60e08",
+  "review_findings": [
+    4276417327
+  ],
+  "private_pattern_count": 72,
+  "scope": "Actual declared-format checks and configured private scan after annotation correction; source/runtime unchanged by the correction; fresh hosted evidence required"
+}

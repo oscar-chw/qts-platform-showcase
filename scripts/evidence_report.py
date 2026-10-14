@@ -54,6 +54,11 @@ def markdown_lines(text):
             if re.fullmatch(r" {0,3}" + re.escape(fence[0]) + "{" + str(fence[1]) + r",}[ \t]*", line):
                 fence = None
             continue
+        prefixed = re.match(r"(?: {0,3}(?:>[ \t]?|(?:[-+*]|[0-9]{1,9}[.)])[ \t]+))+(`{3,}|~{3,})(.*)$", line)
+        if prefixed and not (prefixed[1][0] == "`" and "`" in prefixed[2]):
+            raise ReportError("inconsistent_arithmetic", "Fence openers after list or quotation markers are unsupported; use a standalone opener")
+        if re.match(r" {0,3}<(?:!--|[!?]|/?[A-Za-z][A-Za-z0-9-]*(?:[ \t/>]|$))", line):
+            raise ReportError("inconsistent_arithmetic", "Raw markup blocks are unsupported in the declared evidence format")
         opening = re.match(r" {0,3}(`{3,}|~{3,})(.*)$", line)
         if opening and not (opening[1][0] == "`" and "`" in opening[2]):
             fence = (opening[1][0], len(opening[1]))

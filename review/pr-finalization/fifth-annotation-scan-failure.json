@@ -1,0 +1,21 @@
+{
+  "command": "bash scripts/check.sh",
+  "exit_code": 1,
+  "diagnostic": "Configured private pattern rejected the node title annotation in two files; matched value remains redacted",
+  "changed_annotations": [
+    {
+      "file": "plan/showcase-workflows.md",
+      "before_sha256": "fd398750fa7ffc5d1a4e8af71d67d89991c5247b9a2e2f126afa57d4f3bd963f",
+      "after_sha256": "8a06e107ce35e139ab580cfbb940b6746c8c675bca3abc49e46eec23aa3b72b6"
+    },
+    {
+      "file": "plan/showcase-workflows/09-marker-fence-refusal.md",
+      "before_sha256": "eb5d88bd0d6a3bf87cdf43b5609f3bc62cfbfc4d4ea5890f5669335772ccefdc",
+      "after_sha256": "e76728abc51c1f935cbb92e3ebf1a1797ae79687a8f9a2e5b9133cead856ddce"
+    }
+  ],
+  "gate_expression_unchanged": true,
+  "private_pattern_file_unchanged": true,
+  "scope": "Title wording correction only; no checker, assertion, outcome or acceptance requirement changed",
+  "record_path_note": "The newly generated node record was renamed with neutral wording; before/after content hashes and the failed check remain unchanged."
+}
