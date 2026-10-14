@@ -48,12 +48,14 @@ To audit an edited copy of the public report:
 python3 scripts/evidence_report.py --results edited-results.md
 ```
 
-The file must use the existing raw-count, headline, scale and concurrency tables. This is a
+The file must use the existing raw-count, headline, scale and concurrency tables. Each section
+and each aggregate row used by the arithmetic must appear exactly once. This is a
 specific public-evidence format, not a parser for arbitrary market-data files. The input limit is
 524288 bytes. Count cells accept nonnegative decimal integers, with correctly grouped commas,
 up to 9223372036854775807 and at most nineteen digits after removing commas. Required count
-names must appear once each. Counts contributing to one result must name the same valid source
-date, and the corresponding headline/result must name that source too. Percentage denominators
+names must appear once each. Source references require a nonempty name and valid date. Counts
+contributing to one result must name the same dated source, and the corresponding headline/result
+must name that source too. Percentage denominators
 must be nonzero; the typed count must cover the cleansed count.
 
 | Failure | Reported code | Recovery |
@@ -63,8 +65,8 @@ must be nonzero; the typed count must cover the cleansed count.
 | Oversized input or invalid text encoding | `input_too_large` / `invalid_encoding` | Use a bounded utf-8 report; do not truncate evidence silently. |
 | Missing, duplicate, unsupported or malformed count | `invalid_counts` | Correct the named table entry against its dated source. |
 | Zero denominator or impossible layer relationship | `invalid_count_relationship` | Resolve the input relationship before computing a percentage. |
-| Mixed source snapshots | `inconsistent_sources` | Reconcile the dates/source references instead of combining incompatible records. |
-| A published derived statement disagrees with its counts | `inconsistent_arithmetic` | Correct the raw input or derived statement, with source provenance. |
+| Missing source name/date or mixed source snapshots | `inconsistent_sources` | Supply the named source and reconcile its date/reference before combining records. |
+| Missing or duplicate aggregate row/section, or a derived statement disagrees with its counts | `inconsistent_arithmetic` | Remove ambiguity and correct the raw input or derived statement, with source provenance. |
 
 Input/report failures emit one json error object on standard error and exit with status one. Standard output
 stays empty, so a failed report cannot be mistaken for a usable result. The document is never

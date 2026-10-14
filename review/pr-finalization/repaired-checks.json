@@ -1,0 +1,34 @@
+{
+  "commands": [
+    {
+      "command": "bash scripts/check.sh",
+      "exit_code": 0,
+      "report_cases": 30,
+      "document_controls": 30,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m unittest discover -s tests -p test_evidence_report.py",
+      "exit_code": 0,
+      "report_cases": 30,
+      "document_controls": null,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m ruff check --config ruff.toml .",
+      "exit_code": 0,
+      "report_cases": null,
+      "document_controls": null,
+      "legacy_resource_warning": false
+    }
+  ],
+  "original27_test_methods": "all byte-identical",
+  "source_sha256": "4a8d85ea9aa9556e143c91d4162d574fb47e2bc2d8029c8e1051dddc7d0178f5",
+  "tests_sha256": "db1b667063b87faa016e377f4140e508492fc1ea895ba593194add77c529a3c3",
+  "review_findings": [
+    4275141347,
+    4275141357
+  ],
+  "private_pattern_count": 72,
+  "scope": "actual report refusal and original document/privacy acceptance; fresh remote evidence required"
+}

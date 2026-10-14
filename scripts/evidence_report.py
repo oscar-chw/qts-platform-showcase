@@ -61,10 +61,10 @@ def raw_counts(text):
             raise ReportError("invalid_counts", "Raw count exceeds the supported integer range: " + row[0])
         parts = row[2].rsplit(", ", 1)
         try:
-            if len(parts) != 2 or date.fromisoformat(parts[1]).isoformat() != parts[1]:
-                raise ValueError("missing date")
+            if len(parts) != 2 or not parts[0].strip() or date.fromisoformat(parts[1]).isoformat() != parts[1]:
+                raise ValueError("missing source name or date")
         except ValueError as error:
-            raise ReportError("inconsistent_sources", "Raw source needs a valid date: " + row[0]) from error
+            raise ReportError("inconsistent_sources", "Raw source needs a name and valid date: " + row[0]) from error
         counts[row[0]] = {"count": int(digits), "source": row[2], "date": parts[1]}
     missing = [name for name in REQUIRED if name not in counts]
     if missing:
@@ -80,6 +80,19 @@ def group_source(counts, names):
     return first["source"], first["date"]
 
 
+def result_table(text, heading):
+    if sum(line.strip() == "## " + heading for line in text.splitlines()) != 1:
+        raise ReportError("inconsistent_arithmetic", "Result section must appear exactly once: " + heading)
+    return table_under(text, heading)
+
+
+def result_row(rows, name, prefix=False):
+    matches = [row for row in rows if row and (row[0].startswith(name) if prefix else row[0] == name)]
+    if len(matches) != 1 or len(matches[0]) != 4:
+        raise ReportError("inconsistent_arithmetic", "Result row must appear once with four cells: " + name)
+    return matches[0]
+
+
 def report(path):
     blob, text = read_snapshot(path)
     counts = raw_counts(text)
@@ -89,21 +102,19 @@ def report(path):
     crypto = sum(counts[name]["count"] for name in CRYPTO)
     if counts[TYPED]["count"] < ashare or counts[TYPED]["count"] == 0 or crypto == 0:
         raise ReportError("invalid_count_relationship", "Typed rows must cover cleansed rows; percentage denominators cannot be zero")
-    headlines = table_under(text, "Headline numbers")
-    stored = next((row for row in headlines if row and row[0].startswith("Stored market-data rows")), None)
-    concurrency = table_under(text, "Concurrency")
-    read_row = next((row for row in concurrency if row and row[0] == "Reads"), None)
-    if not stored or len(stored) != 4 or not read_row or len(read_row) != 4:
-        raise ReportError("inconsistent_arithmetic", "Headline or concurrency result table missing or malformed")
+    headlines = result_table(text, "Headline numbers")
+    stored = result_row(headlines, "Stored market-data rows", prefix=True)
+    result_row(headlines, "A-share rows cleansing removed", prefix=True)
+    concurrency = result_table(text, "Concurrency")
+    read_row = result_row(concurrency, "Reads")
     if stored[3] != stored_source or read_row[3] != reads_source:
         raise ReportError("inconsistent_sources", "Result and raw counts refer to different source snapshots")
-    scale = table_under(text, "Scale")
+    scale = result_table(text, "Scale")
     for prefix in ["A-share rows, cleansed", "Crypto rows, stored", "Sum of the two, stored rows"]:
-        row = next((row for row in scale if row and row[0].startswith(prefix)), None)
-        if not row or len(row) != 4:
-            raise ReportError("inconsistent_arithmetic", "Computed scale result is missing or malformed")
+        row = result_row(scale, prefix, prefix=True)
         if row[3] != stored_source:
             raise ReportError("inconsistent_sources", "Scale result and raw counts refer to different source snapshots")
+    result_row(scale, "A-share rows removed by cleansing", prefix=True)
     # Existing arithmetic code reads a path. Give it only our captured bytes so the digest and
     # computed statements cannot refer to two different reads of a mutable caller file.
     try:

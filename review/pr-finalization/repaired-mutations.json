@@ -1,0 +1,88 @@
+{
+  "source_sha256": "4a8d85ea9aa9556e143c91d4162d574fb47e2bc2d8029c8e1051dddc7d0178f5",
+  "tests_sha256": "db1b667063b87faa016e377f4140e508492fc1ea895ba593194add77c529a3c3",
+  "python_version": "3.9.6",
+  "cases": [
+    {
+      "case": "control",
+      "exit_code": 0,
+      "witness": null,
+      "expected_outcome": "pass",
+      "test_source_unchanged": true,
+      "implementation_sha256": "4a8d85ea9aa9556e143c91d4162d574fb47e2bc2d8029c8e1051dddc7d0178f5"
+    },
+    {
+      "case": "drop_crypto",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "7fd1efd18d10fb945c568eebeae05ce898a10e157feb5c1fd209000d39183028"
+    },
+    {
+      "case": "constant_digest",
+      "exit_code": 1,
+      "witness": "test_content_digest_changes_on_editorial_change",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "f01920ba7717583311cadbd49865d9cdb21dea77b0738c719cb8c9c5b1ddaf64"
+    },
+    {
+      "case": "claim_private_verified",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "dd023314a661501d1af7e3d7e9621202c1e6fd7c65f729cf8b70c488ab318d25"
+    },
+    {
+      "case": "reread_caller",
+      "exit_code": 1,
+      "witness": "test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "f642175ee97e37c48aee9689f71f4ee8ca903aac95eeff1fc9e5e5a73a0c8c06"
+    },
+    {
+      "case": "ignore_arithmetic",
+      "exit_code": 1,
+      "witness": "test_inconsistent_computed_sum_is_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "6a183e398e7974139980f61dfd2241422263f7a767c40240a8c4460d10e5570c"
+    },
+    {
+      "case": "ignore_result_source",
+      "exit_code": 1,
+      "witness": "test_headline_date_must_match_raw_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "9eef31864fa1ef6111212a2f9c6db06b0be767c810e319e1029b0d017728db26"
+    },
+    {
+      "case": "accept_duplicate_result_rows",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_rows_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "bd46c53d6551bc03e7aec8514f3f9b05d64410a8bebb1e28177a4342c456350d"
+    },
+    {
+      "case": "accept_duplicate_result_sections",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_sections_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "ba05acc17502ce1f92cc2dae940fad1e622643385c4819c3d68e8ad123e5251b"
+    },
+    {
+      "case": "accept_missing_source_name",
+      "exit_code": 1,
+      "witness": "test_source_names_cannot_be_empty_with_valid_matching_dates",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "428f73426b251ca63e55d1ceba4b7917de1d78a0f6c93c7adba4c705b0aaa1ea"
+    }
+  ],
+  "scope": "six preserved defects plus three hosted-review regression defects; same-run control"
+}
