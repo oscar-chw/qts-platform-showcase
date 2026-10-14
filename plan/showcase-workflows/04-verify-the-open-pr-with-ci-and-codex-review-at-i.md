@@ -19,3 +19,7 @@ Third hosted review at85f found code headings truncating section scans and missi
 ## Released 2026-10-14T20:58:36Z — local author
 
 Fourth review atbbbf found negated expected figures accepted and supported headings rejected by the arithmetic reader; ordinary repair required.
+
+## Released 2026-10-14T21:30:17Z — local author
+
+Fifth review at843 found marker-prefixed fence openers hiding later evidence rows; fail-closed format repair required.

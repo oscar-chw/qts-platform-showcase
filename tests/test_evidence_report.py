@@ -329,6 +329,55 @@ class EvidenceReportTests(unittest.TestCase):
                     self.assertEqual(report["concurrency_reads"]["total"], 1111)
                     self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
 
+    def test_container_fences_cannot_hide_contradictory_reads(self):
+        for marker, close in [("- ", "  "), ("+ ", "  "), ("* ", "  "),
+                              ("1. ", "   "), ("1) ", "   "), ("> - ", ">   ")]:
+            with self.subTest(marker=marker):
+                self.path.write_bytes(self.original)
+                lines = self.path.read_text().splitlines()
+                start = lines.index("## Concurrency")
+                stop = next(i for i in range(start + 1, len(lines)) if lines[i].startswith("## "))
+                row = next(line for line in lines[start + 1:stop] if line.startswith("| Reads |"))
+                cells = row.split("|")
+                cells[2] = " contradictory value "
+                lines[stop:stop] = ["", marker + "```text", close + "a literal example", close + "```", "",
+                                    "| Measure | Result | Label | Source |", "|---|---|---|---|", "|".join(cells), ""]
+                self.path.write_text("\n".join(lines) + "\n")
+                self.reject("inconsistent_arithmetic")
+
+    def test_marker_prefixed_fence_openers_have_a_named_format_refusal(self):
+        for marker in ["- ", "+ ", "* ", "1. ", "1) ", "> ", ">- ", "- > "]:
+            with self.subTest(marker=marker):
+                self.path.write_bytes(self.original)
+                with self.path.open("a") as file:
+                    file.write("\n" + marker + "```text\n  an example\n  ```\n")
+                self.reject("inconsistent_arithmetic")
+
+    def test_literal_marker_fences_inside_supported_code_remain_opaque(self):
+        for marker in ["- ", "1. ", "> ", ">- "]:
+            with self.subTest(marker=marker):
+                self.path.write_bytes(self.original)
+                self.edit("## Raw counts\n", "## Raw counts\n\n````text\n" + marker + "```text\n"
+                          "  ## Raw counts\n  ```\n````\n")
+                report = self.success()
+                self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
+    def test_raw_markup_cannot_hide_later_evidence_rows(self):
+        for opening, closing in [("<!--", "-->"), ("<pre>", "</pre>"), ("<div>", "</div>")]:
+            with self.subTest(opening=opening):
+                self.path.write_bytes(self.original)
+                lines = self.path.read_text().splitlines()
+                start = lines.index("## Concurrency")
+                stop = next(i for i in range(start + 1, len(lines)) if lines[i].startswith("## "))
+                row = next(line for line in lines[start + 1:stop] if line.startswith("| Reads |"))
+                cells = row.split("|")
+                cells[2] = " contradictory value "
+                lines[stop:stop] = ["", opening, "## note", closing, "",
+                                    "| Measure | Result | Label | Source |", "|---|---|---|---|", "|".join(cells), ""]
+                self.path.write_text("\n".join(lines) + "\n")
+                self.reject("inconsistent_arithmetic")
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):

@@ -1,0 +1,5 @@
+# Safe refusal of marker-prefixed fence openers
+
+Fifth hosted review `5524847395` at `843571deb3f0cdb94e80c6004a12f505a30e304d` found [a list-marker opener hiding later rows](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4276417327). The standalone-fence parser misses the prefixed opener and can mistake its closing fence for a new opener, suppressing the rest of the document. The input is a declared evidence format, not general Markdown: fail closed on fences opened after list/quotation markers, naming the unsupported format. Standalone openers, indentation rules and literal prefixed examples inside an already-open supported fence remain supported.
+
+Done when the real prior command reproduces hidden contradictory rows and unreported unsupported openers, then the command refuses both with a named error while accepting literal examples inside supported fences. All forty-two earlier methods and numerical/old arithmetic/privacy sources stay unchanged. The original repository gate and fresh revision-bound CI/review must pass. No dependency or general Markdown renderer is added; earlier accepted pins and failure records remain.

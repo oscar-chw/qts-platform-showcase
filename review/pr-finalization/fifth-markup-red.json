@@ -1,0 +1,9 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py -k test_raw_markup_cannot_hide_later_evidence_rows",
+  "exit_code": 1,
+  "case_count": 1,
+  "failing_subcases": 3,
+  "source_sha256": "a73f4c402f2f3370eebfa10d6b781a902644e4e07d8bdf5823e476e2e1d4455b",
+  "tests_sha256": "526ecae24aca99fad2ff1220eb5509ebdf8b76509023f8f8a6e479715e243353",
+  "scope": "Same opaque-block defect class: raw markup promotes a literal heading to a section boundary and hides later contradictory rows"
+}
