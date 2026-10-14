@@ -32,7 +32,26 @@
     "scope": "published arithmetic only; no private dataset query"
   },
   "checker_sha256": "3c9a2a6a0a11b5ca613b24605f6628365a3d4f42d6e59aa764f582c0b8aefa80",
-  "full_repo_audit": "pending",
+  "full_repo_audit": {
+    "command": "plan gate showcase-workflows 1 --owner codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1",
+    "gate": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" bash ../tools/check_repo.sh \"$PWD\"",
+    "checked_implementation": "37e4d665a7fda27ece53220b4c3c801442546ea9",
+    "exit_code": 0,
+    "passed_checks": 16,
+    "failed_checks": 0,
+    "gate_seconds": 2,
+    "scope": "clean committed implementation, original full audit including fresh-clone demo, privacy, history and overlap"
+  },
   "independent_acceptance": "pending",
-  "publication": "held"
+  "publication": "held",
+  "current_source_hashes": {
+    "README.md": "b0fa13af7792f1ad936faeea9c36cf27cb1e482af6f3a4c7ebe6e28913cff20f",
+    "docs/README.md": "74651108ebc56a775627f8b716e6152601e2db2731ef572255817dd881b79580",
+    "docs/results.md": "d64adba8c44c821709b7daefa435cc1bac4a1e5f8e84a7ce1e6235cc0ce9a844",
+    "docs/research-workflow.md": "f0176bdf71817ca2bc01b7eb7445b9bc1f84947fd5c56aa6412ee138e9351703",
+    "scripts/check_docs.py": "3c9a2a6a0a11b5ca613b24605f6628365a3d4f42d6e59aa764f582c0b8aefa80",
+    "scripts/check.sh": "b1608799cf58ed565848b442f3620cdc74d4e59440ffc679a2c662cc9f7734b1",
+    "scripts/figures.py": "fda72ede9019ad6962e404df9e5d99e4249468aa874de29f7acad2053738ab6b",
+    "scripts/demo.sh": "a9c5320e2c36c15faa1584e941b890c0d26ef23ca44db8b4c06d87e3b6c21c47"
+  }
 }

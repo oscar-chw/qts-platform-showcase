@@ -27,3 +27,25 @@ Held at preserved-patch checker-expression false positive; follow-up correction 
 ## Summary 2026-10-14T12:03:22Z — local author
 
 Coordinator reviewed and approved the exact checker-expression allowlist correction and positive control under explicit delegated human approval. Applied exactly; working-directory control and all original rejection cases retained. Both failed receipts preserved; resuming the same full checks.
+
+## Attempt 2026-10-14T12:10:23Z — local author — 2s — exit 0
+
+```
+PASS  committed
+  PASS  readme
+  PASS  tidy
+  PASS  attribution
+  PASS  links
+  PASS  check.sh
+  PASS  ignored-source
+  PASS  license
+  PASS  decisions
+  PASS  ci
+  PASS  fresh-demo
+  PASS  meta
+  PASS  size
+  PASS  todos
+  PASS  private-code
+  PASS  history
+qts-platform-showcase: PASS (0 failed)
+```

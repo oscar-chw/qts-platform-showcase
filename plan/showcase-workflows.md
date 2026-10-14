@@ -2,9 +2,10 @@
 
 Done-condition: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
 
-- [>] 1. Document a researcher workflow, evidence boundaries and an executable public arithmetic example | ctx: docs/research-workflow.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T12:03:21Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+- [x] 1. Document a researcher workflow, evidence boundaries and an executable public arithmetic example | ctx: docs/research-workflow.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
       2026-10-14T11:40:14Z released — Held at unchanged document-check false positive; human correction required; proposal un-applied.
       2026-10-14T12:01:36Z released — Held at preserved-patch checker-expression false positive; follow-up correction awaits coordinator decision.
+      2026-10-14T12:10:23Z exit 0 in 2s [f0310ab2] — PASS  private-code / PASS  history / qts-platform-showcase: PASS (0 failed)
 
 ## analysis
 
