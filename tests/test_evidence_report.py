@@ -139,6 +139,41 @@ class EvidenceReportTests(unittest.TestCase):
                     file.write("\n## " + heading + "\n\n")
                 self.reject("inconsistent_arithmetic")
 
+    def test_later_tables_cannot_hide_duplicate_consumed_rows(self):
+        cases = [("Raw counts", "A-share cleansed orders", "invalid_counts"),
+                 ("Headline numbers", "Stored market-data rows", "inconsistent_arithmetic"),
+                 ("Headline numbers", "A-share rows cleansing removed", "inconsistent_arithmetic"),
+                 ("Scale", "A-share rows, cleansed", "inconsistent_arithmetic"),
+                 ("Scale", "Crypto rows, stored", "inconsistent_arithmetic"),
+                 ("Scale", "Sum of the two, stored rows", "inconsistent_arithmetic"),
+                 ("Scale", "A-share rows removed by cleansing", "inconsistent_arithmetic"),
+                 ("Concurrency", "Reads |", "inconsistent_arithmetic")]
+        for heading, prefix, code in cases:
+            for indent in ["", "   "]:
+                with self.subTest(heading=heading, prefix=prefix, indent=indent):
+                    self.path.write_bytes(self.original)
+                    lines = self.path.read_text().splitlines()
+                    start = lines.index("## " + heading)
+                    stop = next((i for i in range(start + 1, len(lines)) if lines[i].startswith("## ")), len(lines))
+                    row = next(line for line in lines[start + 1:stop] if line.startswith("| " + prefix))
+                    cells = row.split("|")
+                    cells[2] = " contradictory value "
+                    later = ["", "Additional observations:", "", indent + "| Measure | Value | Label | Source |",
+                             indent + "|---|---|---|---|", indent + "|".join(cells), ""]
+                    lines[stop:stop] = later
+                    self.path.write_text("\n".join(lines) + "\n")
+                    self.reject(code)
+
+    def test_cleansing_removal_result_sources_must_match_contributing_counts(self):
+        for prefix in ["A-share rows cleansing removed", "A-share rows removed by cleansing"]:
+            for source in ["unknown", "table counts, 2026-10-06", ", 2026-10-05"]:
+                with self.subTest(prefix=prefix, source=source):
+                    self.path.write_bytes(self.original)
+                    row = next(line for line in self.path.read_text().splitlines() if line.startswith("| " + prefix))
+                    self.assertIn("table counts, 2026-10-05", row)
+                    self.edit(row, row.replace("table counts, 2026-10-05", source))
+                    self.reject("inconsistent_sources")
+
     def test_source_names_cannot_be_empty_with_valid_matching_dates(self):
         sources = ["table counts, 2026-10-05", "concurrency gate results, 2026-09-23"]
         for source in sources:

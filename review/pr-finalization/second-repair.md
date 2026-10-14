@@ -1,0 +1,5 @@
+# Full-section and removal-reference repair
+
+Second hosted review `5523805377` at `0dc3a3c439df0adf603b92c526a64d98f9febf77` found [later-table duplicates](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4275557348) and [unbound cleansing-removal references](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4275557354). A blank line plus another table within the same heading can hide consumed rows from the first contiguous-table parser. Both removal-result rows need the same dated reference as the counts used to derive them.
+
+Done when actual command regressions reject later-table duplicates across consumed sections (including raw counts) and unnamed/undated/differently dated removal references; every original assertion, arithmetic dependency and published input stays unchanged; full repository acceptance and exact-revision remote CI/review pass. Scan all pipe rows in a uniquely identified section, retaining the existing cell normalization. Raw counts must still be one complete declared count set; result labels are unique over the full section. Preserve the prior review's repairs and records.
