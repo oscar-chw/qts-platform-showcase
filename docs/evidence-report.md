@@ -178,5 +178,6 @@ private-platform capacity.
 
 The current local evidence covers the stated cases on Python 3.9.6 and 3.11. The existing figure
 reader can emit a resource warning when called directly under warning-enabled tests; that warning
-has not been suppressed or used as a performance claim. Remote checks for this local candidate
-have not run.
+has not been suppressed or used as a performance claim. Remote evidence on
+[the review PR](https://github.com/oscar-chw/qts-platform-showcase/pull/1) must cover the exact
+candidate revision being assessed; earlier checks do not cover changed source.
