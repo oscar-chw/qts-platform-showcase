@@ -1,12 +1,14 @@
 """Public evidence must bind one document and refuse contradictory records."""
 
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 REPO = Path(__file__).resolve().parent.parent
@@ -105,6 +107,12 @@ class EvidenceReportTests(unittest.TestCase):
         self.edit(row, row + "\n" + row)
         self.reject("invalid_counts")
 
+    def test_duplicate_raw_section_is_refused(self):
+        with self.path.open("a") as file:
+            file.write("\n## Raw counts\n\n| Count | Value | Source |\n|---|---|---|\n"
+                       "| A-share cleansed orders | 1 | table counts, 2026-10-05 |\n")
+        self.reject("invalid_counts")
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):
@@ -116,6 +124,31 @@ class EvidenceReportTests(unittest.TestCase):
         row = "| A-share cleansed orders | 293,894,477,866 | table counts, 2026-10-05 |"
         self.edit(row, row.replace("2026-10-05", "2026-10-06"))
         self.reject("inconsistent_sources")
+
+    def test_headline_date_must_match_raw_counts(self):
+        headline = "| 700B+ | Live | table counts, 2026-10-05 |"
+        self.edit(headline, headline.replace("2026-10-05", "2026-10-06"))
+        self.reject("inconsistent_sources")
+
+    def test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes(self):
+        spec = importlib.util.spec_from_file_location("public_evidence_under_test", PROGRAM)
+        module = importlib.util.module_from_spec(spec)
+        sys.path.insert(0, str(PROGRAM.parent))
+        try:
+            spec.loader.exec_module(module)
+        finally:
+            sys.path.pop(0)
+        original_derive = module.derive
+
+        def change_caller_after_capture(snapshot):
+            self.path.write_bytes(self.original.replace(b"| 43,446,124,248 |", b"| 43,446,124,249 |", 1))
+            return original_derive(snapshot)
+
+        with patch.object(module, "derive", side_effect=change_caller_after_capture):
+            result = module.report(self.path)
+        self.assertEqual(result["provenance"]["sha256"], hashlib.sha256(self.original).hexdigest())
+        self.assertEqual(result["stored_rows"]["total"], 704009291430)
+        self.assertNotEqual(self.path.read_bytes(), self.original)
 
     def test_invalid_source_date_is_refused(self):
         row = "| A-share cleansed orders | 293,894,477,866 | table counts, 2026-10-05 |"

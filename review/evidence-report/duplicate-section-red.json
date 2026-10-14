@@ -1,0 +1,7 @@
+{
+  "command": "python3 -m unittest discover -s tests -p 'test_evidence_report.py'",
+  "exit_code": 1,
+  "cases": 24,
+  "failure": "An appended conflicting Raw counts section is ignored and the report succeeds. The new witness requires refusal.",
+  "source_repaired": false
+}
