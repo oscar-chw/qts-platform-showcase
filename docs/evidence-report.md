@@ -57,6 +57,11 @@ names must appear once each. Source references require a nonempty name and valid
 contributing to one result must name the same dated source, and the corresponding headline/result
 must name that source too. Percentage denominators
 must be nonzero; the typed count must cover the cleansed count.
+Rows are checked across the complete section, including later or indented tables after prose.
+Both cleansing-removal count references must agree with their contributing raw counts. The scale
+row also cites dated day-range and rule sources; its single `(counts)` reference identifies the
+contributing count snapshot, while those other named citations retain their own dates. Raw counts
+remain one declared count set under a three-cell header; another header or count table is refused.
 
 | Failure | Reported code | Recovery |
 |---|---|---|

@@ -7,3 +7,7 @@ ctx: review/pr-finalization/preparation.md
 ## Released 2026-10-14T19:21:13Z — local author
 
 Hosted review completed at ae8cc39 with two valid input-refusal findings; source repair and fresh review required.
+
+## Released 2026-10-14T20:05:36Z — local author
+
+Second hosted review at0dc found later-table ambiguity and missing cleansing-removal reference binding; ordinary repair and fresh review required.

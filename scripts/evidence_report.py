@@ -10,7 +10,7 @@ import re
 import sys
 import tempfile
 
-from figures import derive, table_under
+from figures import LINK, derive
 
 
 DEFAULT = Path(__file__).resolve().parent.parent / "docs/results.md"
@@ -47,11 +47,30 @@ def read_snapshot(path):
     return blob, text
 
 
+def section_rows(text, heading, code):
+    lines = text.splitlines()
+    starts = [i for i, line in enumerate(lines) if line.strip() == "## " + heading]
+    if len(starts) != 1:
+        raise ReportError(code, "Section must appear exactly once: " + heading)
+    start = starts[0]
+    stop = next((i for i in range(start + 1, len(lines)) if lines[i].strip().startswith("## ")), len(lines))
+    rows = []
+    for line in lines[start + 1:stop]:
+        if not line.lstrip().startswith("|"):
+            continue
+        cells = [LINK.sub(r"\1", cell).replace("**", "").strip()
+                 for cell in line.strip().strip("|").split("|")]
+        if not all(re.fullmatch(r":?-+:?", cell) for cell in cells):
+            rows.append(cells)
+    return rows
+
+
 def raw_counts(text):
-    if sum(line.strip() == "## Raw counts" for line in text.splitlines()) != 1:
-        raise ReportError("invalid_counts", "The raw-count section must appear exactly once")
+    rows = section_rows(text, "Raw counts", "invalid_counts")
+    if not rows or len(rows[0]) != 3 or rows[0][0] in REQUIRED:
+        raise ReportError("invalid_counts", "Raw-count table needs a three-cell header")
     counts = {}
-    for index, row in enumerate(table_under(text, "Raw counts"), 1):
+    for index, row in enumerate(rows[1:], 1):
         if len(row) != 3 or row[0] not in REQUIRED or row[0] in counts:
             raise ReportError("invalid_counts", "Missing, duplicate or unsupported raw count at row " + str(index))
         if not INTEGER.fullmatch(row[1]):
@@ -81,9 +100,7 @@ def group_source(counts, names):
 
 
 def result_table(text, heading):
-    if sum(line.strip() == "## " + heading for line in text.splitlines()) != 1:
-        raise ReportError("inconsistent_arithmetic", "Result section must appear exactly once: " + heading)
-    return table_under(text, heading)
+    return section_rows(text, heading, "inconsistent_arithmetic")
 
 
 def result_row(rows, name, prefix=False):
@@ -91,6 +108,21 @@ def result_row(rows, name, prefix=False):
     if len(matches) != 1 or len(matches[0]) != 4:
         raise ReportError("inconsistent_arithmetic", "Result row must appear once with four cells: " + name)
     return matches[0]
+
+
+def removal_source(reference, expected):
+    citations = [part.strip() for part in reference.split(";")]
+    for citation in citations:
+        plain = re.sub(r" \([^()]*\)$", "", citation)
+        parts = plain.rsplit(", ", 1)
+        try:
+            if len(parts) != 2 or not parts[0].strip() or date.fromisoformat(parts[1]).isoformat() != parts[1]:
+                raise ValueError("missing source name or date")
+        except ValueError as error:
+            raise ReportError("inconsistent_sources", "Removal references need named, valid dated sources") from error
+    count_refs = [citation for citation in citations if citation.endswith(" (counts)")]
+    if reference != expected and count_refs != [expected + " (counts)"]:
+        raise ReportError("inconsistent_sources", "Removal count reference differs from its contributing counts")
 
 
 def report(path):
@@ -104,17 +136,18 @@ def report(path):
         raise ReportError("invalid_count_relationship", "Typed rows must cover cleansed rows; percentage denominators cannot be zero")
     headlines = result_table(text, "Headline numbers")
     stored = result_row(headlines, "Stored market-data rows", prefix=True)
-    result_row(headlines, "A-share rows cleansing removed", prefix=True)
+    removed = result_row(headlines, "A-share rows cleansing removed", prefix=True)
     concurrency = result_table(text, "Concurrency")
     read_row = result_row(concurrency, "Reads")
-    if stored[3] != stored_source or read_row[3] != reads_source:
+    if stored[3] != stored_source or removed[3] != stored_source or read_row[3] != reads_source:
         raise ReportError("inconsistent_sources", "Result and raw counts refer to different source snapshots")
     scale = result_table(text, "Scale")
     for prefix in ["A-share rows, cleansed", "Crypto rows, stored", "Sum of the two, stored rows"]:
         row = result_row(scale, prefix, prefix=True)
         if row[3] != stored_source:
             raise ReportError("inconsistent_sources", "Scale result and raw counts refer to different source snapshots")
-    result_row(scale, "A-share rows removed by cleansing", prefix=True)
+    scale_removed = result_row(scale, "A-share rows removed by cleansing", prefix=True)
+    removal_source(scale_removed[3], stored_source)
     # Existing arithmetic code reads a path. Give it only our captured bytes so the digest and
     # computed statements cannot refer to two different reads of a mutable caller file.
     try:

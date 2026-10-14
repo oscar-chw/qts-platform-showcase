@@ -185,6 +185,19 @@ class EvidenceReportTests(unittest.TestCase):
                     self.path.write_text(text.replace(source, name + ", " + source.rsplit(", ", 1)[1]))
                     self.reject("inconsistent_sources")
 
+    def test_removal_auxiliary_references_require_named_valid_dates(self):
+        references = ["table counts, 2026-10-03 (day ranges)",
+                      "data platform design, 2026-09-28 (only exact duplicates are removed)"]
+        for reference in references:
+            for invalid in ["unknown", ", 2026-10-03", "table counts, 2026-99-03"]:
+                with self.subTest(reference=reference, invalid=invalid):
+                    self.path.write_bytes(self.original)
+                    row = next(line for line in self.path.read_text().splitlines()
+                               if line.startswith("| A-share rows removed by cleansing"))
+                    self.assertIn(reference, row)
+                    self.edit(row, row.replace(reference, invalid))
+                    self.reject("inconsistent_sources")
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):

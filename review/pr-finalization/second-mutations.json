@@ -1,0 +1,120 @@
+{
+  "source_sha256": "2d157c7153ae6cadc742d1a6f04038c75006dc0e24e170ce3a6441f9b2000c18",
+  "tests_sha256": "1fad79256080c282b53c7455119b82fc44b70e0a55ed12aa572b99e7cf27ffd8",
+  "python_version": "3.9.6",
+  "cases": [
+    {
+      "case": "control",
+      "exit_code": 0,
+      "witness": null,
+      "expected_outcome": "pass",
+      "test_source_unchanged": true,
+      "implementation_sha256": "2d157c7153ae6cadc742d1a6f04038c75006dc0e24e170ce3a6441f9b2000c18"
+    },
+    {
+      "case": "drop_crypto",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "7a343e6b41f651aa74b416deae15ceddc2c40b43b0df6ba0ffc61861907d2919"
+    },
+    {
+      "case": "constant_digest",
+      "exit_code": 1,
+      "witness": "test_content_digest_changes_on_editorial_change",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "e58c18fd7f979203405263bf01d830fa10a7b881bf7067bdaca17a46000e3eed"
+    },
+    {
+      "case": "claim_private_verified",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "f8dfe4570d83e7df0a8672431c2f50037c3822f03265fb5c64f1da88cf77ad77"
+    },
+    {
+      "case": "reread_caller",
+      "exit_code": 1,
+      "witness": "test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "7dab37ef275ed9747c49788bc98bb71f2fad82e3fb69633f1f0d8ad9347cd190"
+    },
+    {
+      "case": "ignore_arithmetic",
+      "exit_code": 1,
+      "witness": "test_inconsistent_computed_sum_is_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "08cad6e212b9367e1ce41a8125aeb2aecac3c630dc14426525852c13ee2c3216"
+    },
+    {
+      "case": "ignore_result_source",
+      "exit_code": 1,
+      "witness": "test_headline_date_must_match_raw_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "bec0798d958d82cafd254900d869925a5bac3a5f20a6f7cbd3d626c9d8fa22ce"
+    },
+    {
+      "case": "accept_duplicate_result_rows",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_rows_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "c0364a979ab8a89b0c521d2fbf7171d2e938dbe4715e84cafada35d8c38c3020"
+    },
+    {
+      "case": "accept_duplicate_result_sections",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_sections_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "ba4f97c134ad26e17f3ca905790e222bfa8eca47888f96e8278e66e70681e9e1"
+    },
+    {
+      "case": "accept_missing_source_name",
+      "exit_code": 1,
+      "witness": "test_source_names_cannot_be_empty_with_valid_matching_dates",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "96781a82cd30d3256e375bd69520c7c1849da042a55ee1af4dea0aa2faaf3489"
+    },
+    {
+      "case": "stop_after_first_table",
+      "exit_code": 1,
+      "witness": "test_later_tables_cannot_hide_duplicate_consumed_rows",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "4fcd688cbf8ca2ac5940839272cf67e78cd461c5ed88bc0d9fdca3d6e06a689e"
+    },
+    {
+      "case": "ignore_headline_removal_source",
+      "exit_code": 1,
+      "witness": "test_cleansing_removal_result_sources_must_match_contributing_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "649846f0c63938212c73e84ac0e6a6b2d33f83b2bd7f19e114455af0a7410a8f"
+    },
+    {
+      "case": "ignore_scale_removal_source",
+      "exit_code": 1,
+      "witness": "test_cleansing_removal_result_sources_must_match_contributing_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "08c1770dcf6f83589cb8d7f1bff5d12e61f8aa6f3ed2a282b198debe46f33baa"
+    },
+    {
+      "case": "ignore_auxiliary_source_validity",
+      "exit_code": 1,
+      "witness": "test_removal_auxiliary_references_require_named_valid_dates",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "implementation_sha256": "79479077afa83fa891fe9cf61a90e51172d3f7973901f909cb27ad93adbb402e"
+    }
+  ],
+  "scope": "six earlier defects, three first-review defects and four section/reference defects; same-run control"
+}
