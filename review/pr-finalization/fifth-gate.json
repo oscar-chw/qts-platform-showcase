@@ -1,0 +1,11 @@
+{
+  "implementation_revision": "e66a3f8c778f1ca0a41c41f86a4cbfeffafdea9d",
+  "command": "plan gate showcase-workflows 9 --owner codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1",
+  "exit_code": 0,
+  "checks_passed": 16,
+  "checks_failed": 0,
+  "duration_seconds": 13,
+  "configured_private_scan": true,
+  "record_sha256": "5a8db7c7930906e01617d3f60d8fe155f249214d6b7fd14782e93b0ac669d60e",
+  "scope": "Full local acceptance of declared-format opaque-block refusals; fresh hosted evidence required"
+}
