@@ -15,3 +15,7 @@ Second hosted review at0dc found later-table ambiguity and missing cleansing-rem
 ## Released 2026-10-14T20:31:58Z — local author
 
 Third hosted review at85f found code headings truncating section scans and missing required auxiliary citations; ordinary repair and fresh review required.
+
+## Released 2026-10-14T20:58:36Z — local author
+
+Fourth review atbbbf found negated expected figures accepted and supported headings rejected by the arithmetic reader; ordinary repair required.

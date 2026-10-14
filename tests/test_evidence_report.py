@@ -284,6 +284,51 @@ class EvidenceReportTests(unittest.TestCase):
                     self.assertEqual(report["concurrency_reads"]["total"], 1111)
                     self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
 
+    def test_negated_or_obsolete_result_values_do_not_verify(self):
+        prefixes = ["Stored market-data rows", "A-share rows cleansing removed",
+                    "A-share rows, cleansed", "Crypto rows, stored", "Sum of the two, stored rows",
+                    "A-share rows removed by cleansing", "Reads |"]
+        for prefix in prefixes:
+            for wording in ["not ", "obsolete "]:
+                with self.subTest(prefix=prefix, wording=wording):
+                    self.path.write_bytes(self.original)
+                    row = next(line for line in self.path.read_text().splitlines()
+                               if line.startswith("| " + prefix))
+                    cells = row.split("|")
+                    cells[2] = " " + wording + cells[2].strip() + " "
+                    self.edit(row, "|".join(cells))
+                    self.reject("inconsistent_arithmetic")
+
+    def test_rounded_headline_components_cannot_be_negated(self):
+        for value in ["565.9B", "138.1B"]:
+            for wording in ["not ", "obsolete "]:
+                with self.subTest(value=value, wording=wording):
+                    self.path.write_bytes(self.original)
+                    row = next(line for line in self.path.read_text().splitlines()
+                               if line.startswith("| Stored market-data rows"))
+                    self.assertIn(value, row)
+                    self.edit(row, row.replace(value, wording + value))
+                    self.reject("inconsistent_arithmetic")
+
+    def test_threshold_prose_cannot_negate_or_obsolete_values(self):
+        for value in ["2.9%", "39.1%"]:
+            for wording in ["not ", "obsolete "]:
+                with self.subTest(value=value, wording=wording):
+                    self.path.write_bytes(self.original)
+                    self.edit(value, wording + value)
+                    self.reject("inconsistent_arithmetic")
+
+    def test_supported_heading_spelling_keeps_report_values(self):
+        for heading in ["Raw counts", "Headline numbers", "Scale", "Concurrency"]:
+            for spelling in ["## " + heading + " ##", "   ## " + heading + " ####", "##\t" + heading + "\t##"]:
+                with self.subTest(heading=heading, spelling=spelling):
+                    self.path.write_bytes(self.original)
+                    self.edit("## " + heading + "\n", spelling + "\n")
+                    report = self.success()
+                    self.assertEqual(report["stored_rows"]["total"], 704009291430)
+                    self.assertEqual(report["concurrency_reads"]["total"], 1111)
+                    self.assertEqual(report["provenance"]["sha256"], hashlib.sha256(self.path.read_bytes()).hexdigest())
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):
