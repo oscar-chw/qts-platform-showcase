@@ -113,6 +113,43 @@ class EvidenceReportTests(unittest.TestCase):
                        "| A-share cleansed orders | 1 | table counts, 2026-10-05 |\n")
         self.reject("invalid_counts")
 
+    def test_duplicate_consumed_aggregate_rows_are_refused(self):
+        prefixes = ["Stored market-data rows", "A-share rows cleansing removed",
+                    "A-share rows, cleansed", "Crypto rows, stored", "Sum of the two, stored rows",
+                    "A-share rows removed by cleansing", "Reads |"]
+        for prefix in prefixes:
+            for contradict in [False, True]:
+                with self.subTest(prefix=prefix, contradict=contradict):
+                    self.path.write_bytes(self.original)
+                    row = next(line for line in self.path.read_text().splitlines()
+                               if line.startswith("| " + prefix))
+                    duplicate = row
+                    if contradict:
+                        cells = row.split("|")
+                        cells[2] = " contradictory value "
+                        duplicate = "|".join(cells)
+                    self.edit(row, row + "\n" + duplicate)
+                    self.reject("inconsistent_arithmetic")
+
+    def test_duplicate_consumed_aggregate_sections_are_refused(self):
+        for heading in ["Headline numbers", "Scale", "Concurrency"]:
+            with self.subTest(heading=heading):
+                self.path.write_bytes(self.original)
+                with self.path.open("a") as file:
+                    file.write("\n## " + heading + "\n\n")
+                self.reject("inconsistent_arithmetic")
+
+    def test_source_names_cannot_be_empty_with_valid_matching_dates(self):
+        sources = ["table counts, 2026-10-05", "concurrency gate results, 2026-09-23"]
+        for source in sources:
+            for name in ["", " ", "\t"]:
+                with self.subTest(source=source, name=name):
+                    self.path.write_bytes(self.original)
+                    text = self.path.read_text()
+                    self.assertIn(source, text)
+                    self.path.write_text(text.replace(source, name + ", " + source.rsplit(", ", 1)[1]))
+                    self.reject("inconsistent_sources")
+
     def test_non_integer_negative_or_bad_grouping_is_refused(self):
         for value in ["not-a-count", "-1", "1.5", "29,38"]:
             with self.subTest(value=value):

@@ -1,0 +1,5 @@
+# Hosted review input-refusal repair
+
+Review `5523300962` on `ae8cc394b7b3180ea34f733ae197ca79fc2f931d` found two causal input gaps. [Duplicate aggregate finding](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4275141347): a contradictory second row or section can be ignored by first-match parsing. [Missing source-name finding](https://github.com/oscar-chw/qts-platform-showcase/pull/1#discussion_r4275141357): matching source references with an empty name and valid date can pass.
+
+Done when the actual command refuses duplicate consumed aggregate rows/sections and missing source names with named errors, every prior case/control remains, the original repository gate passes, and the successor receives revision-bound CI and hosted review. Reproduce first with the same public document and command, then add only the needed validation. Keep the existing arithmetic dependency and published inputs unchanged. Missing, duplicate or ambiguous derived inputs cannot be certified; a source date requires a nonempty name. Node four depends on this repair without changing its remote gate.
