@@ -1,0 +1,7 @@
+{
+  "command": "python3 -m unittest discover -s tests -p 'test_evidence_report.py'",
+  "exit_code": 1,
+  "cases": 25,
+  "failure": "A scale result with a different source date is admitted despite the raw and headline source. New witness requires inconsistent_sources refusal.",
+  "source_repaired": false
+}

@@ -130,6 +130,12 @@ class EvidenceReportTests(unittest.TestCase):
         self.edit(headline, headline.replace("2026-10-05", "2026-10-06"))
         self.reject("inconsistent_sources")
 
+    def test_scale_result_date_must_match_raw_counts(self):
+        row = next(line for line in self.path.read_text().splitlines()
+                   if line.startswith("| Sum of the two, stored rows |"))
+        self.edit(row, row.replace("2026-10-05", "2026-10-06"))
+        self.reject("inconsistent_sources")
+
     def test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes(self):
         spec = importlib.util.spec_from_file_location("public_evidence_under_test", PROGRAM)
         module = importlib.util.module_from_spec(spec)
