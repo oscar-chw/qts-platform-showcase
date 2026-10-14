@@ -35,3 +35,25 @@ M docs/evidence-report.md
   PASS  history
 qts-platform-showcase: FAIL (1 failed)
 ```
+
+## Attempt 2026-10-14T21:12:11Z — local author — 13s — exit 0
+
+```
+PASS  committed
+  PASS  readme
+  PASS  tidy
+  PASS  attribution
+  PASS  links
+  PASS  check.sh
+  PASS  ignored-source
+  PASS  license
+  PASS  decisions
+  PASS  ci
+  PASS  fresh-demo
+  PASS  meta
+  PASS  size
+  PASS  todos
+  PASS  private-code
+  PASS  history
+qts-platform-showcase: PASS (0 failed)
+```

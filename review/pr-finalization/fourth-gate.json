@@ -1,0 +1,12 @@
+{
+  "implementation_revision": "856b70de6a6fce47012699170a24a141edd108d7",
+  "command": "plan gate showcase-workflows 8 --owner codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1",
+  "exit_code": 0,
+  "checks_passed": 16,
+  "checks_failed": 0,
+  "duration_seconds": 13,
+  "configured_private_scan": true,
+  "prior_failure": "Uncommitted source after a mistaken generated record filename; preserved in node record",
+  "record_sha256": "5391b5b42f3d03b569b64edd279ddc1219f3d36770ebd09ca65fd848b5286782",
+  "scope": "Full local repository acceptance of complete derived-value/heading repairs; fresh hosted evidence required"
+}
