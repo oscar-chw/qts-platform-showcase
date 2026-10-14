@@ -1,0 +1,36 @@
+{
+  "scope": "Configured private-list before/after controls; approved exception has a prefix-boundary implementation defect",
+  "cases": [
+    {
+      "case": "public bracket field",
+      "old_error_count": 1,
+      "current_error_count": 0,
+      "expected_current_error": false
+    },
+    {
+      "case": "public dotted field",
+      "old_error_count": 1,
+      "current_error_count": 0,
+      "expected_current_error": false
+    },
+    {
+      "case": "standalone access wording",
+      "old_error_count": 1,
+      "current_error_count": 1,
+      "expected_current_error": true
+    },
+    {
+      "case": "allowed field plus access wording",
+      "old_error_count": 2,
+      "current_error_count": 1,
+      "expected_current_error": true
+    },
+    {
+      "case": "different member expression",
+      "old_error_count": 1,
+      "current_error_count": 0,
+      "expected_current_error": true
+    }
+  ],
+  "required_fix": "Keep the approved actor-field exception, rejecting non-actor member prefixes. No original assertion or private pattern changes."
+}

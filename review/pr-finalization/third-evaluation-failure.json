@@ -1,0 +1,10 @@
+{
+  "command": "python3 review/pr-finalization/evaluate_third_repair.py",
+  "exit_code": 1,
+  "control": "pass",
+  "mutants_caught_before_failure": 14,
+  "surviving_mutant": "ignore_indented_code",
+  "mutated_suite_exit_code": 0,
+  "source_sha256": "83edf985be17d364816face32d08530d35ca8de9a92207a4fd25d4c2f208ebb6",
+  "scope": "The added literal-code positive examples were outside consumed sections; remaining mutations not evaluated"
+}

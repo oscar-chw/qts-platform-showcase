@@ -1,0 +1,8 @@
+{
+  "base": "9ce249e8f7d592f85f8f9d3c30dcd32be3767c39",
+  "original_document_privacy_controls": "byte-identical",
+  "original_figure_arithmetic": "byte-identical",
+  "original_reading_demo": "byte-identical",
+  "full_script": "every original command preserved in order; only missing-file refusal and new test invocation added",
+  "zero_case_guard": "new test load hook refuses an empty class"
+}

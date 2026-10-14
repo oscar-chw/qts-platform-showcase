@@ -1,0 +1,178 @@
+{
+  "command": "python3 -S scripts/evidence_report.py --results <temporary public document>; unrelated working directory",
+  "source_sha256": "ff6f327e045eb3e136fa24c3b6229b131c97c842fc79797f64488f5f0e60e108",
+  "steps": [
+    {
+      "case": "normal",
+      "exit_code": 0,
+      "result": {
+        "arithmetic_verified": true,
+        "concurrency_reads": {
+          "scope": "dated small correctness fixture",
+          "source_date": "2026-09-23",
+          "source_ref": "concurrency gate results, 2026-09-23",
+          "total": 1111
+        },
+        "limits": [
+          "Published arithmetic only; private source data were not queried or verified.",
+          "Stored rows do not establish a distinct-row count.",
+          "Cleansing-removal source-snapshot reconciliation remains open.",
+          "No new throughput, cold-query latency, uptime or backtest-library claim."
+        ],
+        "operational_health_verified": false,
+        "provenance": {
+          "document": "results.md",
+          "scope": "captured public aggregate document",
+          "sha256": "d64adba8c44c821709b7daefa435cc1bac4a1e5f8e84a7ce1e6235cc0ce9a844"
+        },
+        "schema": "qts-public-evidence/v1",
+        "source_data_verified": false,
+        "stored_rows": {
+          "ashare_cleansed": 565949690871,
+          "crypto_stored": 138059600559,
+          "distinct_count": null,
+          "source_date": "2026-10-05",
+          "source_ref": "table counts, 2026-10-05",
+          "total": 704009291430
+        }
+      }
+    },
+    {
+      "case": "code_heading_hidden_duplicate",
+      "exit_code": 1,
+      "result": {
+        "error": {
+          "code": "inconsistent_arithmetic",
+          "document": "results.md",
+          "message": "Result row must appear once with four cells: Stored market-data rows"
+        }
+      }
+    },
+    {
+      "case": "corrected",
+      "exit_code": 0,
+      "result": {
+        "arithmetic_verified": true,
+        "concurrency_reads": {
+          "scope": "dated small correctness fixture",
+          "source_date": "2026-09-23",
+          "source_ref": "concurrency gate results, 2026-09-23",
+          "total": 1111
+        },
+        "limits": [
+          "Published arithmetic only; private source data were not queried or verified.",
+          "Stored rows do not establish a distinct-row count.",
+          "Cleansing-removal source-snapshot reconciliation remains open.",
+          "No new throughput, cold-query latency, uptime or backtest-library claim."
+        ],
+        "operational_health_verified": false,
+        "provenance": {
+          "document": "results.md",
+          "scope": "captured public aggregate document",
+          "sha256": "d64adba8c44c821709b7daefa435cc1bac4a1e5f8e84a7ce1e6235cc0ce9a844"
+        },
+        "schema": "qts-public-evidence/v1",
+        "source_data_verified": false,
+        "stored_rows": {
+          "ashare_cleansed": 565949690871,
+          "crypto_stored": 138059600559,
+          "distinct_count": null,
+          "source_date": "2026-10-05",
+          "source_ref": "table counts, 2026-10-05",
+          "total": 704009291430
+        }
+      }
+    },
+    {
+      "case": "missing_auxiliary_roles",
+      "exit_code": 1,
+      "result": {
+        "error": {
+          "code": "inconsistent_sources",
+          "document": "results.md",
+          "message": "Removal references are incomplete or name a different count snapshot"
+        }
+      }
+    },
+    {
+      "case": "literal_example_before_table",
+      "exit_code": 0,
+      "result": {
+        "arithmetic_verified": true,
+        "concurrency_reads": {
+          "scope": "dated small correctness fixture",
+          "source_date": "2026-09-23",
+          "source_ref": "concurrency gate results, 2026-09-23",
+          "total": 1111
+        },
+        "limits": [
+          "Published arithmetic only; private source data were not queried or verified.",
+          "Stored rows do not establish a distinct-row count.",
+          "Cleansing-removal source-snapshot reconciliation remains open.",
+          "No new throughput, cold-query latency, uptime or backtest-library claim."
+        ],
+        "operational_health_verified": false,
+        "provenance": {
+          "document": "results.md",
+          "scope": "captured public aggregate document",
+          "sha256": "23e32547eaceae84993d28a6c5bf4e6fe0adebc08319e46607f1b47d57e08a7c"
+        },
+        "schema": "qts-public-evidence/v1",
+        "source_data_verified": false,
+        "stored_rows": {
+          "ashare_cleansed": 565949690871,
+          "crypto_stored": 138059600559,
+          "distinct_count": null,
+          "source_date": "2026-10-05",
+          "source_ref": "table counts, 2026-10-05",
+          "total": 704009291430
+        }
+      }
+    },
+    {
+      "case": "recovered",
+      "exit_code": 0,
+      "result": {
+        "arithmetic_verified": true,
+        "concurrency_reads": {
+          "scope": "dated small correctness fixture",
+          "source_date": "2026-09-23",
+          "source_ref": "concurrency gate results, 2026-09-23",
+          "total": 1111
+        },
+        "limits": [
+          "Published arithmetic only; private source data were not queried or verified.",
+          "Stored rows do not establish a distinct-row count.",
+          "Cleansing-removal source-snapshot reconciliation remains open.",
+          "No new throughput, cold-query latency, uptime or backtest-library claim."
+        ],
+        "operational_health_verified": false,
+        "provenance": {
+          "document": "results.md",
+          "scope": "captured public aggregate document",
+          "sha256": "d64adba8c44c821709b7daefa435cc1bac4a1e5f8e84a7ce1e6235cc0ce9a844"
+        },
+        "schema": "qts-public-evidence/v1",
+        "source_data_verified": false,
+        "stored_rows": {
+          "ashare_cleansed": 565949690871,
+          "crypto_stored": 138059600559,
+          "distinct_count": null,
+          "source_date": "2026-10-05",
+          "source_ref": "table counts, 2026-10-05",
+          "total": 704009291430
+        }
+      }
+    }
+  ],
+  "input_unchanged": true,
+  "site_packages_disabled": true,
+  "prior33_test_methods": "all byte-identical",
+  "unchanged_sources": {
+    "docs/results.md": "d64adba8c44c821709b7daefa435cc1bac4a1e5f8e84a7ce1e6235cc0ce9a844",
+    "scripts/figures.py": "fda72ede9019ad6962e404df9e5d99e4249468aa874de29f7acad2053738ab6b",
+    "scripts/check_docs.py": "111a436fe02d61bd6d4aa2eed01e59b306679dbbceac05379805d7d907c022d1",
+    "scripts/demo.sh": "a9c5320e2c36c15faa1584e941b890c0d26ef23ca44db8b4c06d87e3b6c21c47"
+  },
+  "scope": "captured public document, literal code handling, refusal and recovery; no private platform query"
+}

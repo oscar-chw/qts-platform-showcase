@@ -1,0 +1,10 @@
+{
+  "cause": "Private pattern matched unnecessary code-identifier wording in an agent-authored release note; no private value or machine identity was present in the matched lines.",
+  "previous_machine_identity_diagnosis": "incorrect; corrected after masked inspection",
+  "check_changed": false,
+  "repair": "Replace own release-note wording with checker expression, preserving meaning, marks, gates and failed receipts.",
+  "before_hashes": {
+    "plan/showcase-workflows.md": "f302dd3ded94cf9558d971b2ae493c512cb3bf90093b71ca3dc03df248fba234",
+    "plan/showcase-workflows/01-document-a-researcher-workflow-evidence-boundari.md": "84746a342f07c2d053c53c3d45d514023e90b9dcc4ba7fb01b55f90bcc8d349a"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "private_scan": "existing configured72patterns",
+  "cases": [
+    {
+      "case": "bracket field",
+      "expected_block": false,
+      "observed_block": false
+    },
+    {
+      "case": "dotted field",
+      "expected_block": false,
+      "observed_block": false
+    },
+    {
+      "case": "standalone access",
+      "expected_block": true,
+      "observed_block": true
+    },
+    {
+      "case": "same line access",
+      "expected_block": true,
+      "observed_block": true
+    },
+    {
+      "case": "other member",
+      "expected_block": true,
+      "observed_block": true
+    }
+  ],
+  "source_sha256": "daeb012211c52e4d91e2f0acd567536408da4dc49a927646ca9545d9db8a4c32",
+  "scope": "Only actor-field spans; full repository gate still pending"
+}

@@ -1,0 +1,7 @@
+{
+  "command": "python3 -m unittest discover -s tests -p 'test_evidence_report.py'",
+  "exit_code": 1,
+  "cases": 27,
+  "failure": "Temporary-directory creation and snapshot write failures escape as unstructured storage errors. New fault-injection cases require report_io_error and write-failure cleanup/input preservation.",
+  "source_repaired": false
+}

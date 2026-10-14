@@ -1,0 +1,15 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py",
+  "exit_code": 1,
+  "case_count": 42,
+  "failing_subcases": 34,
+  "methods": [
+    "test_negated_or_obsolete_result_values_do_not_verify",
+    "test_rounded_headline_components_cannot_be_negated",
+    "test_supported_heading_spelling_keeps_report_values",
+    "test_threshold_prose_cannot_negate_or_obsolete_values"
+  ],
+  "source_sha256": "ff6f327e045eb3e136fa24c3b6229b131c97c842fc79797f64488f5f0e60e108",
+  "tests_sha256": "ec2d2572a9152a583e7e615a24e00444c413ab975e4c441f388042ce76f196e1",
+  "scope": "Actual prior command accepts expected numbers in negated/obsolete statements and rejects supported heading spellings"
+}

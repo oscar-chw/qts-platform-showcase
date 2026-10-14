@@ -1,0 +1,29 @@
+{
+  "source_revision": "1061b80",
+  "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" bash ../tools/check_repo.sh \"$PWD\"",
+  "exit_code": 0,
+  "checks": {
+    "committed": "pass",
+    "readme": "pass",
+    "tidy": "pass",
+    "attribution": "pass",
+    "links": "pass",
+    "check.sh": "pass",
+    "ignored-source": "pass",
+    "license": "pass",
+    "decisions": "pass",
+    "ci": "pass",
+    "fresh-demo": "pass",
+    "meta": "pass",
+    "size": "pass",
+    "todos": "pass",
+    "private-code": "pass",
+    "history": "pass"
+  },
+  "role": "author gate; independent coordinator review remains separate",
+  "checker_sha256": "111a436fe02d61bd6d4aa2eed01e59b306679dbbceac05379805d7d907c022d1",
+  "report_source_sha256": "d7c153ea358dac412aa99374aa12f160796d5fb0fbc5c8779a674b721a82ba81",
+  "private_pattern_count": 72,
+  "remote_ci": "not yet run for PR",
+  "hosted_review": "not yet requested"
+}

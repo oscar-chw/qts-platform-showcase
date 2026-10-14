@@ -1,0 +1,36 @@
+{
+  "source_base": "b8194631965266679dbb87b04dbcfde6b1a48307",
+  "branch": "codex/qts-showcase-workflows-20261014",
+  "status": "uncommitted local draft; human check decision pending",
+  "document_hashes": {
+    "README.md": "02688c8e4f6719ca9da41b6ddedab17759ffde857f24d2241964992e6b5367d2",
+    "docs/README.md": "74651108ebc56a775627f8b716e6152601e2db2731ef572255817dd881b79580",
+    "docs/results.md": "6a87273cb7f6d49273450177b42ea56f694456452fc050500c908d5485c551f4",
+    "docs/research-workflow.md": "f0176bdf71817ca2bc01b7eb7445b9bc1f84947fd5c56aa6412ee138e9351703"
+  },
+  "unchanged_check_hashes": {
+    "scripts/check_docs.py": "5ee7282d8bf018b3d8df0f17aa6866cfbcf0e3a594d76a6193e43d827b28bf26",
+    "scripts/check.sh": "b1608799cf58ed565848b442f3620cdc74d4e59440ffc679a2c662cc9f7734b1",
+    "scripts/figures.py": "fda72ede9019ad6962e404df9e5d99e4249468aa874de29f7acad2053738ab6b",
+    "scripts/demo.sh": "a9c5320e2c36c15faa1584e941b890c0d26ef23ca44db8b4c06d87e3b6c21c47"
+  },
+  "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" python3 scripts/check_docs.py",
+  "exit_code": 1,
+  "passed": [
+    "links and fences",
+    "headlines",
+    "arithmetic",
+    "numbers"
+  ],
+  "failed": [
+    "forbidden terms: working-directory variable rejected in plan and generated record"
+  ],
+  "not_run": [
+    "reading demo command after modification",
+    "full repository audit",
+    "independent acceptance",
+    "publication"
+  ],
+  "proposed_patch": "review/working-directory-proposal.patch",
+  "patch_applied": false
+}

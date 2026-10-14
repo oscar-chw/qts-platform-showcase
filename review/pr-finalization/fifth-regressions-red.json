@@ -1,0 +1,26 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py -k <named causal method>",
+  "results": [
+    {
+      "method": "test_container_fences_cannot_hide_contradictory_reads",
+      "exit_code": 1,
+      "case_count": 1,
+      "failing_subcases": 5
+    },
+    {
+      "method": "test_marker_prefixed_fence_openers_have_a_named_format_refusal",
+      "exit_code": 1,
+      "case_count": 1,
+      "failing_subcases": 8
+    },
+    {
+      "method": "test_literal_marker_fences_inside_supported_code_remain_opaque",
+      "exit_code": 0,
+      "case_count": 1,
+      "failing_subcases": 0
+    }
+  ],
+  "source_sha256": "a73f4c402f2f3370eebfa10d6b781a902644e4e07d8bdf5823e476e2e1d4455b",
+  "tests_sha256": "526ecae24aca99fad2ff1220eb5509ebdf8b76509023f8f8a6e479715e243353",
+  "scope": "Focused unchanged causal acceptance methods on the actual prior command; full earlier forty-two-case baseline already pinned"
+}

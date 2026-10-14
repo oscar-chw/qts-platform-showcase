@@ -1,0 +1,9 @@
+{
+  "base": "9ce249e8f7d592f85f8f9d3c30dcd32be3767c39",
+  "command": "python3 -m unittest discover -s tests -p 'test_evidence_report.py'",
+  "exit_code": 1,
+  "cases": 19,
+  "failures_including_subcases": 22,
+  "reason": "The requested report command does not exist yet; expected interface assertions fail. No implementation source was written before these cases.",
+  "original_acceptance_checks": "preserved; full script adds the report suite, missing-file refusal and zero-case load guard"
+}

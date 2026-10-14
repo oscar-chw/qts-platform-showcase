@@ -1,0 +1,26 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py -k <named causal method>",
+  "results": [
+    {
+      "method": "test_indented_consumed_tables_preserve_report_values",
+      "exit_code": 1,
+      "case_count": 1,
+      "failing_subcases": 12
+    },
+    {
+      "method": "test_marker_prefixed_raw_markup_has_a_named_refusal",
+      "exit_code": 1,
+      "case_count": 1,
+      "failing_subcases": 27
+    },
+    {
+      "method": "test_literal_prefixed_markup_in_supported_code_remains_opaque",
+      "exit_code": 0,
+      "case_count": 1,
+      "failing_subcases": 0
+    }
+  ],
+  "source_sha256": "624a041f7ef6b78f5a8723c42188d8bd15f710d24e3dedb0f3855fd0b9681d3c",
+  "tests_sha256": "f17cf446fa285139899a5c1d4c5dda02ecd674f8055f67346fed733000ce21a0",
+  "scope": "Actual prior command rejects accepted table indentation and accepts unsupported prefixed markup; positive supported-code control"
+}

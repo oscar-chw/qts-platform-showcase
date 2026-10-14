@@ -1,0 +1,26 @@
+{
+  "commands": [
+    {
+      "command": "bash scripts/check.sh",
+      "exit_code": 0,
+      "report_case_count": 27,
+      "document_control_count": 30,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m ruff check --config ruff.toml .",
+      "exit_code": 0,
+      "report_case_count": null,
+      "document_control_count": null,
+      "legacy_resource_warning": false
+    }
+  ],
+  "checker_sha256": "111a436fe02d61bd6d4aa2eed01e59b306679dbbceac05379805d7d907c022d1",
+  "scope": "Configured document/private scan, all original and additive controls, reading demo, reporter suite and lint",
+  "private_pattern_count": 72,
+  "approved_changes": [
+    "exact actor-field exception with rejecting member boundary",
+    "public DOMAIN constant and positive control"
+  ],
+  "remote_ci": "not run yet"
+}

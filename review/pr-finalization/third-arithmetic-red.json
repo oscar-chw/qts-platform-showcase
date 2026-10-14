@@ -1,0 +1,12 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py",
+  "exit_code": 1,
+  "case_count": 38,
+  "failing_subcases": 8,
+  "methods": [
+    "test_examples_inside_consumed_sections_cannot_override_arithmetic"
+  ],
+  "source_sha256": "83edf985be17d364816face32d08530d35ca8de9a92207a4fd25d4c2f208ebb6",
+  "tests_sha256": "670775b4ed88de4af72a3d4ea78b35fa1561f32ddeed4a78d00b45a51fb22e17",
+  "scope": "Literal examples inside consumed sections reach the legacy arithmetic reader before the real table"
+}

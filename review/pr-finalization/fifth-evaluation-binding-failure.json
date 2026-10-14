@@ -1,0 +1,11 @@
+{
+  "command": "python3 review/pr-finalization/evaluate_fifth_repair.py",
+  "exit_code": 1,
+  "error": "Mutation binding did not find the raw-markup guard; an escaped tab was interpreted in the needle",
+  "control_case_count": 47,
+  "caught_before_binding_failure": 23,
+  "last_unrun_mutation": "accept_raw_markup_blocks",
+  "source_sha256": "624a041f7ef6b78f5a8723c42188d8bd15f710d24e3dedb0f3855fd0b9681d3c",
+  "tests_sha256": "221796211467f02ae1294f7f7e04446081ff744efbf5f8e2b1b59426d9d60e08",
+  "scope": "Failed instrument binding; no all-defects-passed claim. The correction preserves the occurrence assertion and targets the actual guard."
+}

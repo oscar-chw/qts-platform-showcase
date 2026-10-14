@@ -1,0 +1,14 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py",
+  "exit_code": 1,
+  "case_count": 30,
+  "failing_subcases": 23,
+  "named_methods": [
+    "test_duplicate_consumed_aggregate_rows_are_refused",
+    "test_duplicate_consumed_aggregate_sections_are_refused",
+    "test_source_names_cannot_be_empty_with_valid_matching_dates"
+  ],
+  "reason": "Actual prior command wrongly accepts duplicated consumed rows/sections and empty source names with matching valid dates",
+  "source_sha256": "d7c153ea358dac412aa99374aa12f160796d5fb0fbc5c8779a674b721a82ba81",
+  "tests_sha256": "db1b667063b87faa016e377f4140e508492fc1ea895ba593194add77c529a3c3"
+}

@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s tests -p test_evidence_report.py",
+      "exit_code": 0,
+      "case_count": 27,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m unittest discover -s tests -p test_evidence_report.py",
+      "exit_code": 0,
+      "case_count": 27,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "bash scripts/check.sh",
+      "exit_code": 0,
+      "case_count": 27,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m ruff check --config ruff.toml .",
+      "exit_code": 0,
+      "case_count": null,
+      "legacy_resource_warning": false
+    }
+  ],
+  "source_sha256": "d7c153ea358dac412aa99374aa12f160796d5fb0fbc5c8779a674b721a82ba81",
+  "tests_sha256": "075afb7920b302c16baa0db79c44e20fd38baf10ef0aa842f3e32ad6568b9cbb",
+  "remote_ci": "not run",
+  "independent_review": "pending coordinator"
+}

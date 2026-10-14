@@ -1,0 +1,8 @@
+{
+  "command": "python3 -m unittest discover -s tests -p test_evidence_report.py",
+  "orchestrator_error": "TimeoutExpired",
+  "timeout_seconds": 30,
+  "case_count": null,
+  "completed_suite_result": false,
+  "scope": "Full pre-repair reproduction did not finish inside the orchestrator limit; no full-suite failure-count claim"
+}

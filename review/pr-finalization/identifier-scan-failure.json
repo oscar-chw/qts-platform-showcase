@@ -1,0 +1,17 @@
+{
+  "command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" python3 scripts/check_docs.py",
+  "exit_code": 1,
+  "passed": [
+    "links and fences",
+    "headlines",
+    "arithmetic",
+    "numbers"
+  ],
+  "failed": "forbidden terms: existing public Python constant DOMAIN in retained proposal context",
+  "decision": "Exact identifier-only approval required; proposal is not applied",
+  "applied_actor_correction": "Direct human approval recorded in approval.json; exact-field boundary tightened to reject other member names",
+  "field_controls": "all five configured-list probes match expected outcomes",
+  "new_source_sha256": "daeb012211c52e4d91e2f0acd567536408da4dc49a927646ca9545d9db8a4c32",
+  "private_patterns": "unchanged",
+  "publication": "not run"
+}
