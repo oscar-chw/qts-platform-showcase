@@ -1,0 +1,52 @@
+{
+  "base_revision": "9ce249e8f7d592f85f8f9d3c30dcd32be3767c39",
+  "implementation_revision": "032329842bad90611b14a83158c7b2dcd21c3a1a",
+  "plan_node": 2,
+  "gate_command": "FORBIDDEN_TERMS_FILE=\"$PWD/../_work/qts-forbidden.local.txt\" bash ../tools/check_repo.sh \"$PWD\"",
+  "gate_exit_code": 0,
+  "repository_checks": {
+    "committed": "pass",
+    "readme": "pass",
+    "tidy": "pass",
+    "attribution": "pass",
+    "links": "pass",
+    "check.sh": "pass",
+    "ignored-source": "pass",
+    "license": "pass",
+    "decisions": "pass",
+    "ci": "pass",
+    "fresh-demo": "pass",
+    "meta": "pass",
+    "size": "pass",
+    "todos": "pass",
+    "private-code": "pass",
+    "history": "pass"
+  },
+  "case_tests": 27,
+  "compatibility": [
+    "3.9.6",
+    "3.11"
+  ],
+  "mutants_caught": 6,
+  "same_run_control": "pass",
+  "original_check_sources": "preserved byte-for-byte; full check only adds new cases",
+  "source_pins": {
+    "scripts/evidence_report.py": "d7c153ea358dac412aa99374aa12f160796d5fb0fbc5c8779a674b721a82ba81",
+    "tests/test_evidence_report.py": "075afb7920b302c16baa0db79c44e20fd38baf10ef0aa842f3e32ad6568b9cbb",
+    "scripts/check.sh": "39a8c6a8be4356471e39b05619a3703b8e4166fb4c79ced1285c2264a50b41f2",
+    "scripts/check_docs.py": "3c9a2a6a0a11b5ca613b24605f6628365a3d4f42d6e59aa764f582c0b8aefa80",
+    "scripts/figures.py": "fda72ede9019ad6962e404df9e5d99e4249468aa874de29f7acad2053738ab6b",
+    "scripts/demo.sh": "a9c5320e2c36c15faa1584e941b890c0d26ef23ca44db8b4c06d87e3b6c21c47",
+    "docs/results.md": "d64adba8c44c821709b7daefa435cc1bac4a1e5f8e84a7ce1e6235cc0ce9a844",
+    "docs/evidence-report.md": "756577ddd86eb643fec8c8ab480068f2b865b08a76b4c4461fd3d716df6ffd60",
+    "review/evidence-report/evaluate_mutations.py": "3fcc0bc60bccba3c3998475769f4024fa24b78f045a8854c162cc5488fad1e1a",
+    "review/evidence-report/mutations.json": "bbfe446f4200bb9e4445d907481c8b9f2e88a5c8e1e590c753d7337e06a308e1",
+    "review/evidence-report/local-checks.json": "5d698b03715c17cd050d84b5dcc1d1be8cb0e316c42859d5942099f7b939783f",
+    "review/evidence-report/fresh-clone.json": "29442b01a36461b8424389e08d9617be4b58965609760806e8ed575718504fac",
+    "review/evidence-report/recovery.json": "ed37623316f1d7cd90ebcc670c67b57f5eaf16d32e8a03103972a7bf374ffa57"
+  },
+  "independent_review": "pending coordinator",
+  "remote_ci": "not run",
+  "public_release": "held",
+  "known_diagnostic": "Inherited figure reader emits a ResourceWarning under direct warning-enabled unit calls; it was not suppressed or edited."
+}

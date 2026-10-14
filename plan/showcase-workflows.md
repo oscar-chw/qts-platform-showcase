@@ -7,7 +7,8 @@ Done-condition: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bas
       2026-10-14T12:01:36Z released — Held at preserved-patch checker-expression false positive; follow-up correction awaits coordinator decision.
       2026-10-14T12:10:23Z exit 0 in 2s [f0310ab2] — PASS  private-code / PASS  history / qts-platform-showcase: PASS (0 failed)
 
-- [>] 2. Add a structured public evidence report with bounded input, provenance, refusal and recovery checks | needs: 1 | ctx: docs/evidence-report.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | lease: 2026-10-14T12:54:22Z | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+- [x] 2. Add a structured public evidence report with bounded input, provenance, refusal and recovery checks | needs: 1 | ctx: docs/evidence-report.md | owner: codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1 | gate: FORBIDDEN_TERMS_FILE="$PWD/../_work/qts-forbidden.local.txt" bash ../tools/check_repo.sh "$PWD"
+      2026-10-14T13:39:39Z exit 0 in 4s [f0310ab2] — PASS  private-code / PASS  history / qts-platform-showcase: PASS (0 failed)
 
 ## Evidence-report scope
 
