@@ -19,3 +19,25 @@ Direct human actor-field approval applied; original24 fixtures retained. Isolate
 ## Released 2026-10-14T18:47:27Z — local author
 
 Held on exact public identifier decision; actor-field scope implemented, full scan not passed.
+
+## Attempt 2026-10-14T19:01:28Z — local author — 5s — exit 0
+
+```
+PASS  committed
+  PASS  readme
+  PASS  tidy
+  PASS  attribution
+  PASS  links
+  PASS  check.sh
+  PASS  ignored-source
+  PASS  license
+  PASS  decisions
+  PASS  ci
+  PASS  fresh-demo
+  PASS  meta
+  PASS  size
+  PASS  todos
+  PASS  private-code
+  PASS  history
+qts-platform-showcase: PASS (0 failed)
+```
