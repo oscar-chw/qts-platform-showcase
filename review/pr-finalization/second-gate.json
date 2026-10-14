@@ -1,0 +1,11 @@
+{
+  "implementation_revision": "4329b928362a3e0cad0eb3f26f298bb6dd972fc8",
+  "command": "plan gate showcase-workflows 6 --owner codex-01a13a2e-4bb4-7f91-ad76-f1541c3b24c1",
+  "exit_code": 0,
+  "checks_passed": 16,
+  "checks_failed": 0,
+  "duration_seconds": 10,
+  "configured_private_scan": true,
+  "record_sha256": "0f582da443143829bea7f44b6129248f73436439292632937503eb56883faa0e",
+  "scope": "local full repository audit of repaired public document computation and source consistency; fresh hosted evidence required"
+}
