@@ -1,0 +1,33 @@
+{
+  "commands": [
+    {
+      "command": "bash scripts/check.sh",
+      "exit_code": 0,
+      "report_cases": 50,
+      "document_controls": 30,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m unittest discover -s tests -p test_evidence_report.py",
+      "exit_code": 0,
+      "report_cases": 50,
+      "document_controls": null,
+      "legacy_resource_warning": true
+    },
+    {
+      "command": "../_venvs/ctp/bin/python -m ruff check --config ruff.toml .",
+      "exit_code": 0,
+      "report_cases": null,
+      "document_controls": null,
+      "legacy_resource_warning": false
+    }
+  ],
+  "source_sha256": "b287e5ffb63e3152c8440a7c3bd5ff983cfec0c5060f6766bd4e007545143b8f",
+  "tests_sha256": "f17cf446fa285139899a5c1d4c5dda02ecd674f8055f67346fed733000ce21a0",
+  "review_findings": [
+    4276778000,
+    4276778010
+  ],
+  "private_pattern_count": 72,
+  "scope": "Accepted pipe rows, prefixed-markup refusal and original configured private-pattern checks; fresh remote evidence required"
+}

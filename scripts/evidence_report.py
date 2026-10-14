@@ -24,6 +24,7 @@ READS = ["Concurrency gate, reads by the first reader kind", "Concurrency gate, 
          "Concurrency gate, reads by the third reader kind"]
 REQUIRED = ASHARE + [TYPED] + CRYPTO + READS
 INTEGER = re.compile(r"(?:[0-9]+|[0-9]{1,3}(?:,[0-9]{3})+)")
+MARKER_PREFIX = r"(?: {0,3}(?:>[ \t]?|(?:[-+*]|[0-9]{1,9}[.)])[ \t]+))"
 
 
 class ReportError(ValueError):
@@ -54,10 +55,10 @@ def markdown_lines(text):
             if re.fullmatch(r" {0,3}" + re.escape(fence[0]) + "{" + str(fence[1]) + r",}[ \t]*", line):
                 fence = None
             continue
-        prefixed = re.match(r"(?: {0,3}(?:>[ \t]?|(?:[-+*]|[0-9]{1,9}[.)])[ \t]+))+(`{3,}|~{3,})(.*)$", line)
+        prefixed = re.match(MARKER_PREFIX + r"+(`{3,}|~{3,})(.*)$", line)
         if prefixed and not (prefixed[1][0] == "`" and "`" in prefixed[2]):
             raise ReportError("inconsistent_arithmetic", "Fence openers after list or quotation markers are unsupported; use a standalone opener")
-        if re.match(r" {0,3}<(?:!--|[!?]|/?[A-Za-z][A-Za-z0-9-]*(?:[ \t/>]|$))", line):
+        if re.match(MARKER_PREFIX + r"* {0,3}<(?:!--|[!?]|/?[A-Za-z][A-Za-z0-9-]*(?:[ \t/>]|$))", line):
             raise ReportError("inconsistent_arithmetic", "Raw markup blocks are unsupported in the declared evidence format")
         opening = re.match(r" {0,3}(`{3,}|~{3,})(.*)$", line)
         if opening and not (opening[1][0] == "`" and "`" in opening[2]):
@@ -68,6 +69,8 @@ def markdown_lines(text):
         heading = re.fullmatch(r" {0,3}##(?:[ \t]+(.*))?", line)
         if heading:
             line = "## " + re.sub(r"[ \t]+#+[ \t]*$", "", heading[1] or "").strip()
+        if line.lstrip().startswith("|"):
+            line = line.lstrip()
         yield line
 
 

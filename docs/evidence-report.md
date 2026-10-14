@@ -72,7 +72,7 @@ refusal; they cannot suppress later evidence. Literal examples inside an already
 fence remain opaque.
 The original bytes bind the digest. The arithmetic reader receives a deterministic view of that
 same captured input with literal code examples excluded and accepted headings normalized; it
-never rereads the caller's file. Derived Result cells, the rounded stored-row Measure and the
+also normalizes accepted pipe-row indentation and never rereads the caller's file. Derived Result cells, the rounded stored-row Measure and the
 threshold-calculation paragraph use the canonical wording in [results.md](results.md), with
 their complete values recomputed from the raw counts. An expected number mentioned as negated,
 obsolete or inside other unsupported wording does not count as agreement. Other editorial text

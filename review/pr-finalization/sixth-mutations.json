@@ -1,0 +1,278 @@
+{
+  "source_sha256": "b287e5ffb63e3152c8440a7c3bd5ff983cfec0c5060f6766bd4e007545143b8f",
+  "tests_sha256": "f17cf446fa285139899a5c1d4c5dda02ecd674f8055f67346fed733000ce21a0",
+  "python_version": "3.9.6",
+  "cases": [
+    {
+      "case": "control",
+      "exit_code": 0,
+      "witness": null,
+      "expected_outcome": "pass",
+      "test_source_unchanged": true,
+      "case_count": 50,
+      "mutation_sites": 0,
+      "implementation_sha256": "b287e5ffb63e3152c8440a7c3bd5ff983cfec0c5060f6766bd4e007545143b8f"
+    },
+    {
+      "case": "drop_crypto",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "e0e6625d078f7fb23094a5feb833a0f60da3e08f449024b1cee70d99018023a5"
+    },
+    {
+      "case": "constant_digest",
+      "exit_code": 1,
+      "witness": "test_content_digest_changes_on_editorial_change",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "f8e6a01b5b4d4df9ce2da523c496abc37a7368f6b6e1da6d881c89d853cad28f"
+    },
+    {
+      "case": "claim_private_verified",
+      "exit_code": 1,
+      "witness": "test_published_counts_and_digest_match_independent_sum",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "1208db8328314b1f6e5e607276e62a58c13cedc1de2640ff892803732cdb9bbb"
+    },
+    {
+      "case": "reread_caller",
+      "exit_code": 1,
+      "witness": "test_digest_and_arithmetic_use_captured_bytes_if_caller_file_changes",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "e291e89b2f5c83bf2381ab80d9333aea7e251af7c711a7d990e1fc59da10f87f"
+    },
+    {
+      "case": "ignore_arithmetic",
+      "exit_code": 1,
+      "witness": "test_inconsistent_computed_sum_is_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 2,
+      "implementation_sha256": "9009414700e0246d36c45667873c526651230c7aca26b93ec34e348f0977c400"
+    },
+    {
+      "case": "ignore_result_source",
+      "exit_code": 1,
+      "witness": "test_headline_date_must_match_raw_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "c89751c23306d7b3e9aa7e2b59169693befbe7d8c6a954224147d2f262a32951"
+    },
+    {
+      "case": "accept_duplicate_result_rows",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_rows_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "285e3638f7d1d14c92f3d7c7884723652611c72d20ec6731d1d38f3d489b77d5"
+    },
+    {
+      "case": "accept_duplicate_result_sections",
+      "exit_code": 1,
+      "witness": "test_duplicate_consumed_aggregate_sections_are_refused",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "c17084436d169f694d7b67a82ecfa0942e3558983a968778384696b2abe1940f"
+    },
+    {
+      "case": "accept_missing_source_name",
+      "exit_code": 1,
+      "witness": "test_source_names_cannot_be_empty_with_valid_matching_dates",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 2,
+      "implementation_sha256": "7f5aaf3ee4e15a74967f821b850b716a0ff1c629d6b4fb902acb2e54c21afcb7"
+    },
+    {
+      "case": "stop_after_first_table",
+      "exit_code": 1,
+      "witness": "test_later_tables_cannot_hide_duplicate_consumed_rows",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "da97c755fb3830112e5f0e74deb4e224f9ca55257a8a4f79440c3d4ca0c3ad0a"
+    },
+    {
+      "case": "ignore_headline_removal_source",
+      "exit_code": 1,
+      "witness": "test_cleansing_removal_result_sources_must_match_contributing_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "5b3d2858a06e4572db55bf40da6bdd3eab5aca64d6f7375627c563c8b33594cc"
+    },
+    {
+      "case": "ignore_scale_removal_source",
+      "exit_code": 1,
+      "witness": "test_cleansing_removal_result_sources_must_match_contributing_counts",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "2a001950427ceb641f1576e16bbfeb846508a1c9e698429beba2a6f677853941"
+    },
+    {
+      "case": "ignore_auxiliary_source_validity",
+      "exit_code": 1,
+      "witness": "test_removal_reference_role_does_not_excuse_missing_name_or_date",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "5bef44e3ca8cd5591866cf64acda16ec7d37fd9997b1238481153fe3ea5fc60e"
+    },
+    {
+      "case": "ignore_fenced_code",
+      "exit_code": 1,
+      "witness": "test_code_headings_cannot_hide_later_duplicate_rows",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "d403da58bbae0e8ade33d408dabb0eea3ee98b34ba984d09d87760a26369a3a9"
+    },
+    {
+      "case": "ignore_indented_code",
+      "exit_code": 1,
+      "witness": "test_examples_inside_consumed_sections_cannot_override_arithmetic",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "7cba1c0b6dce53c56ec74b2ccfe023ffc1d84a657f1786c635117789ca512b61"
+    },
+    {
+      "case": "allow_missing_removal_roles",
+      "exit_code": 1,
+      "witness": "test_removal_citations_require_each_role_exactly_once",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "72edc766eb38579d27023264e38194cdecf16763f003697a55d3f6992593b893"
+    },
+    {
+      "case": "allow_repeated_removal_roles",
+      "exit_code": 1,
+      "witness": "test_removal_citations_require_each_role_exactly_once",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "2c27a65339d0300d4993c9015570aba653dfebcc428523b417b8d55fd05eecf6"
+    },
+    {
+      "case": "arithmetic_reads_literal_code",
+      "exit_code": 1,
+      "witness": "test_examples_inside_consumed_sections_cannot_override_arithmetic",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "ff27fefe9ad0cff6f9985c52afd57ad9bd2823fb402c4d3b6954b663dd7209f1"
+    },
+    {
+      "case": "mention_instead_of_complete_value",
+      "exit_code": 1,
+      "witness": "test_negated_or_obsolete_result_values_do_not_verify",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "5eb5d0e3ec96feb0f759fc860afd9b3f1242812a72e3c6469df499c9e1239fb1"
+    },
+    {
+      "case": "ignore_rounded_measure",
+      "exit_code": 1,
+      "witness": "test_rounded_headline_components_cannot_be_negated",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "f824ccd717a1b4c6f65851a87990c162dd46a0239af207ad02f87cd82ffc353c"
+    },
+    {
+      "case": "ignore_threshold_wording",
+      "exit_code": 1,
+      "witness": "test_threshold_prose_cannot_negate_or_obsolete_values",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "90e31baa46791bff4350ef686677764bd7ba40f500309a7525a61893fe0841f0"
+    },
+    {
+      "case": "skip_heading_normalization",
+      "exit_code": 1,
+      "witness": "test_supported_heading_spelling_keeps_report_values",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "9a00daf874764eccfae9a62e93364bcfc354e086169c3a18a8444427abbad627"
+    },
+    {
+      "case": "accept_marker_prefixed_fences",
+      "exit_code": 1,
+      "witness": "test_container_fences_cannot_hide_contradictory_reads",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "23ec0000790ffdf588bdcb26646cd55faefcecc7f94b772c610b6606a7889a77"
+    },
+    {
+      "case": "accept_raw_markup_blocks",
+      "exit_code": 1,
+      "witness": "test_raw_markup_cannot_hide_later_evidence_rows",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "df94e440bdfb10b700e6e0e5f1533e65807b2099fb5dcf9c98455267c0aaad70"
+    },
+    {
+      "case": "skip_pipe_row_normalization",
+      "exit_code": 1,
+      "witness": "test_indented_consumed_tables_preserve_report_values",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "5140f14bbecf72ed19e5b51d47e70791bbf1c0cd230e837f7937d149f0937aa0"
+    },
+    {
+      "case": "skip_markup_marker_prefix",
+      "exit_code": 1,
+      "witness": "test_marker_prefixed_raw_markup_has_a_named_refusal",
+      "expected_outcome": "caught",
+      "test_source_unchanged": true,
+      "case_count": 1,
+      "mutation_sites": 1,
+      "implementation_sha256": "292d871e3820a84e41f8d1c6dca9503974cbabb9be7f70aaef7cfb42b0500fa3"
+    }
+  ],
+  "scope": "twenty-four earlier defect classes plus two pipe-row/markup-prefix defects; full same-run control and one unchanged causal test per defect; arithmetic bypass changes both validating sites"
+}
